@@ -26,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
     //baskasayfa da da kullnamak istiyoeum
     public void MenuyeTiklama (View view)
     {
-        cekm
+
+        //TODO: implement this later
     }
+
+
 }
