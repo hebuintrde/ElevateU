@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         drawer.openDrawer(GravityCompat.START);
     }
 
-    public void Accountclick (View view)
+    public void AccountClick (View view)
     {
 
         closethedrawer(drawer);
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void HomePageklick (View view)
+    public void HomePageClick (View view)
     {
 
         recreate();
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this,"Chatpanel",Toast.LENGTH_SHORT).show();
     }
 
-    public void Überunsclick (View view)
+    public void AboutUsClick (View view)
     {
         //Accesofüberuns
         Toast.makeText(this,"ÜberunsPanel",Toast.LENGTH_SHORT).show();
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void Mapesclick (View view)
+    public void MapsClick (View view)
     {
         //Accesofmaps
         Toast.makeText(this,"Mapspanel",Toast.LENGTH_SHORT).show();
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void exitclick (View view)
+    public void ExitClick (View view)
     {
         //exit
         AlertDialog.Builder warningwindow = new AlertDialog.Builder(MainActivity.this);
