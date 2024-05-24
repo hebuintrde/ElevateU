@@ -6,78 +6,66 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-public class MainActivity extends AppCompatActivity {
+public class AccountActivity extends AppCompatActivity {
 
     DrawerLayout drawer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_account);
+
 
         drawer=findViewById(R.id.drawer_background);
 
-
     }
-    //i want to use it in another  page (public)
-    //What should it be do, after i click the menu = open the drwawer
+
     public void MenuClick (View view)
     {
-        //Connection with Method open the drawer
-        openthedrawer(drawer);
-    }
-
-    //Method open drawer
-    public static void openthedrawer(DrawerLayout drawer)
-    {
-        // Drawer to be opened from right
-        drawer.openDrawer(GravityCompat.START);
+        //Open the drawer that stand in main Activity
+        MainActivity.openthedrawer(drawer);
     }
 
     public void LogoClick(View view)
     {
 
-        closethedrawer(drawer);
-    }
-
-    public static void closethedrawer(DrawerLayout drawer)
-    {
-        //if drawer is open
-        if(drawer.isDrawerOpen(GravityCompat.START))
-        {
-            drawer.closeDrawer(GravityCompat.START);
-        }
+        MainActivity.closethedrawer(drawer);
     }
 
     public void HomePageClick (View view)
     {
+        //Switching between pages
+        Intent homepage = new Intent(AccountActivity.this,MainActivity.class);
+        homepage.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(homepage);
+        finish();
 
-        recreate();
     }
 
     public void AccountClick (View view)
     {
-        //AccesofAccount
-        Intent account = new Intent(MainActivity.this,AccountActivity.class);
-        account.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(account);
-        finish();
+        recreate();
 
     }
 
     public void ChatClick (View view)
     {
         //Accesofchat
-        Intent chat = new Intent(MainActivity.this,ChatActivity.class);
+        Intent chat = new Intent(AccountActivity.this,ChatActivity.class);
+        //finish Activity, dont come back
         chat.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
         startActivity(chat);
         finish();
+
     }
 
     public void AboutUsClick (View view)
@@ -99,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
     public void ExitClick (View view)
     {
         //exit
-        AlertDialog.Builder warningwindow = new AlertDialog.Builder(MainActivity.this);
+        AlertDialog.Builder warningwindow = new AlertDialog.Builder(AccountActivity.this);
 
         warningwindow.setTitle("Exit");
         warningwindow.setMessage("Are you sure you want to sign out?");
@@ -130,9 +118,10 @@ public class MainActivity extends AppCompatActivity {
     //If the program is stopped, close the drawer
     protected void onPause(){
 
-        closethedrawer(drawer);
+        MainActivity.closethedrawer(drawer);
 
         super.onPause();
     }
+
 
 }

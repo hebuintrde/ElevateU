@@ -3,6 +3,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#ECECF3</color>
     <color name="blue">#001AE3</color>
-    <color name="mor">#8D96D3</color>
+    <color name="lila">#8D96D3</color>
+    <color name="red">#F31707</color>
+    <color name="yellow">#FFC107</color>
+    <color name="green">#4CAF50</color>
+    <color name="pink">#D56E91</color>
+    <color name="darkred">#80130B</color>
+
 
 </resources>
