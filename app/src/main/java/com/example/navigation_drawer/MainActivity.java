@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -12,6 +13,8 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 public class MainActivity extends AppCompatActivity {
+    private Button openSurgicalProceduresActivity;
+    private Button openNonSurgicalProceduresActivity;
 
     DrawerLayout drawer;
 
@@ -19,6 +22,24 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        openSurgicalProceduresActivity = findViewById(R.id.surgical_button);
+        openSurgicalProceduresActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,SurgicalProceduresFinal.class);
+                startActivity(intent);
+            }
+        });
+
+        openNonSurgicalProceduresActivity = findViewById(R.id.non_surgical_button);
+        openNonSurgicalProceduresActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = new Intent(MainActivity.this,SurgicalProceduresFinal.class);
+                startActivity(intent2);
+            }
+        });
 
         drawer=findViewById(R.id.drawer_background);
 
