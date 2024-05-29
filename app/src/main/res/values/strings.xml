@@ -15,4 +15,17 @@
     <string name="fillers">Face and lip fillers</string>
     <string name="laser_hair_removal">Laser hair removal</string>
     <string name="microdermabrasion">Microdermabrasion</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="nose_fragment_title">Nose Reconstruction</string>
+    <string name="liposuction_fragment_title">Liposuction</string>
+    <string name="breast_fragment_title">Breast Augmentation</string>
+
+    <string name="nose">Nose</string>
+    <string name="breast">Breast</string>
+    <string name="body">Body</string>
 </resources>

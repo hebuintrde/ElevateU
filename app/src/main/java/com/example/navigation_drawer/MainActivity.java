@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
     //i want to use it in another  page (public)
-    //What should it be do, after i click the menu = open the drwawer
+    //What should it be do, after i click the menu = open the drawer
     public void MenuClick (View view)
     {
         //Connection with Method open the drawer
