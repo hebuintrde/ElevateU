@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
         openSurgicalProceduresActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,SurgicalProceduresFinal.class);
-                startActivity(intent);
+                Intent surgical_intent = new Intent(MainActivity.this,SurgicalProceduresFinal.class);
+                startActivity(surgical_intent);
             }
         });
 
@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
         openNonSurgicalProceduresActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent2 = new Intent(MainActivity.this,SurgicalProceduresFinal.class);
-                startActivity(intent2);
+                Intent non_surgical_intent = new Intent(MainActivity.this,NonSurgicalProceduresFinal.class);
+                startActivity(non_surgical_intent);
             }
         });
 
