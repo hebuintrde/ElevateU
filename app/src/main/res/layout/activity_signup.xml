@@ -8,7 +8,7 @@
     android:background="@drawable/login_background"
     android:gravity="center"
     android:padding="16dp"
-    tools:context=".LoginscreenActivity">
+    tools:context=".SignupActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,20 +16,32 @@
         android:gravity="center"
         android:orientation="vertical">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Sign Up"
+            android:textSize="40sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:id="@+id/sign_up"/>
+
 
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="24dp"
             android:hint="Name"
             android:textColor="@color/darkred"
-            android:textColorHint="@color/white"
-            android:textSize="20sp"
+            android:textColorHint="@color/black"
+            android:textSize="15sp"
             android:background="@drawable/rounded_corner"
-            android:padding="18dp"
+            android:padding="10dp"
             android:inputType="textPersonName"
+            android:minHeight="48dp"
             android:id="@+id/edit_name"/>
+
 
 
 
@@ -39,11 +51,12 @@
             android:layout_marginTop="16dp"
             android:hint="Surname"
             android:textColor="@color/darkred"
-            android:textColorHint="@color/white"
-            android:textSize="20sp"
+            android:textColorHint="@color/black"
+            android:textSize="15sp"
             android:background="@drawable/rounded_corner"
-            android:padding="18dp"
+            android:padding="10dp"
             android:inputType="text"
+            android:minHeight="48dp"
             android:id="@+id/edit_surname"/>
 
         <EditText
@@ -51,12 +64,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="Birthday"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:textSize="20sp"
+            android:textColor="@color/darkred"
+            android:textColorHint="@color/black"
+            android:textSize="15sp"
             android:background="@drawable/rounded_corner"
-            android:padding="18dp"
+            android:padding="10dp"
             android:inputType="text|date"
+            android:minHeight="48dp"
             android:id="@+id/edit_birthday"/>
 
 
@@ -66,12 +80,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="Email"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:textSize="20sp"
+            android:textColor="@color/darkred"
+            android:textColorHint="@color/black"
+            android:textSize="15sp"
             android:background="@drawable/rounded_corner"
-            android:padding="18dp"
+            android:padding="10dp"
             android:inputType="textEmailAddress"
+            android:minHeight="48dp"
             android:id="@+id/edit_emailr"/>
 
 
@@ -81,13 +96,30 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="Password"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:textSize="20sp"
+            android:textColor="@color/darkred"
+            android:textColorHint="@color/black"
+            android:textSize="15sp"
             android:background="@drawable/rounded_corner"
-            android:padding="18dp"
+            android:padding="10dp"
             android:inputType="textPassword"
+            android:minHeight="48dp"
             android:id="@+id/edit_passwordr"/>
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Confirm Password"
+            android:textColor="@color/darkred"
+            android:textColorHint="@color/black"
+            android:textSize="15sp"
+            android:background="@drawable/rounded_corner"
+            android:padding="10dp"
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            android:id="@+id/signupconfirm"/>
+
 
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="match_parent"

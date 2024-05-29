@@ -16,9 +16,11 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class LoginscreenActivity extends AppCompatActivity {
 
-    EditText edtEmail, edtpassword;
+    EditText email, password;
     Button btnlogin;
     TextView txtnoaccount;
+    DatabaseHelper DB;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +28,12 @@ public class LoginscreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_loginscreen);
 
 
-        edtEmail=findViewById(R.id.edit_email);
-        edtpassword=findViewById(R.id.edit_password);
+        email=findViewById(R.id.edit_email);
+        password=findViewById(R.id.edit_password);
         btnlogin=findViewById(R.id.login_btn);
         txtnoaccount=findViewById(R.id.no_account);
+        DB=new DatabaseHelper(this);
+
 
         txtnoaccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,21 +47,28 @@ public class LoginscreenActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String email_holder = edtEmail.getText().toString();
-                String password_holder = edtpassword.getText().toString();
+                String email_holder = email.getText().toString();
+                String password_holder = password.getText().toString();
 
                 if(email_holder.isEmpty()||password_holder.isEmpty())
                 {
                     Toast.makeText(LoginscreenActivity.this,"Fields cannot be empty",Toast.LENGTH_LONG).show();
 
                 }
-                else {
-                    //if the fields are not empty = login
-
+                Boolean checkuserpass = DB.checkEmailPassword(email_holder, password_holder);
+                if(checkuserpass == true){
+                    Toast.makeText(LoginscreenActivity.this,"Login succesfully",Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(LoginscreenActivity.this,"Invalid Credentials",Toast.LENGTH_LONG).show();
                 }
 
             }
-        });
+
+
+    });
 
     }
 }
