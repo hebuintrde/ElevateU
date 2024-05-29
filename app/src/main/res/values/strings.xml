@@ -1,4 +1,18 @@
 <resources>
     <string name="app_name">Navigation_Drawer</string>
     <string name="chat">Chat</string>
+    <string name="welcome">Welcome to our beauty guide!</string>
+    <string name="description_homepage">We are here to guide your beauty journey and boost your self-esteem. Easily find information about aesthetic procedures by clicking on the buttons below.</string>
+    <string name="surgical_procedures">Explore surgical procedures</string>
+    <string name="non_surgical_procedures">Explore non-surgical procedures</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="surg_procedures_message">Find out more about surgical procedures</string>
+    <string name="breast_augmentation">Breast Augmentation</string>
+    <string name="nose_reconstruction">Nose Reconstruction</string>
+    <string name="liposuction">Liposuction</string>
+    <string name="explore_message2">Find out more about non-surgical procedures</string>
+    <string name="fillers">Face and lip fillers</string>
+    <string name="laser_hair_removal">Laser hair removal</string>
+    <string name="microdermabrasion">Microdermabrasion</string>
 </resources>
