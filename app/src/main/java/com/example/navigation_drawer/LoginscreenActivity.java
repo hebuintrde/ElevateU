@@ -62,7 +62,7 @@ public class LoginscreenActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 else{
-                    Toast.makeText(LoginscreenActivity.this,"Invalid credentials",Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginscreenActivity.this,"Username or password are invalid!",Toast.LENGTH_LONG).show();
                 }
 
             }

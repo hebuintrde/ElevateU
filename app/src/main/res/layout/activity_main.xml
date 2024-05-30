@@ -61,6 +61,7 @@
                 android:backgroundTint="@color/lila2"
                 />
 
+
         </LinearLayout>
 
     </LinearLayout>
@@ -71,7 +72,10 @@
         android:background="@android:color/white"
         android:layout_gravity="start">
 
+        <include
+            layout="@layout/menu_nawigation_drawer"/>
 
     </RelativeLayout>
+
 
 </androidx.drawerlayout.widget.DrawerLayout>
