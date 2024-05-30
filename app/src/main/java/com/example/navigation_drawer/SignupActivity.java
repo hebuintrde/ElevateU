@@ -20,7 +20,7 @@ public class SignupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);  // Ensure this matches your XML file name
+        setContentView(R.layout.activity_signup);  // Ensure this matches the XML file name
 
         // Initialize views
         edtName = findViewById(R.id.edit_name);

@@ -57,12 +57,12 @@ public class LoginscreenActivity extends AppCompatActivity {
                 }
                 Boolean checkuserpass = DB.checkEmailPassword(email_holder, password_holder);
                 if(checkuserpass == true){
-                    Toast.makeText(LoginscreenActivity.this,"Login succesfully",Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginscreenActivity.this,"Login successful",Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                     startActivity(intent);
                 }
                 else{
-                    Toast.makeText(LoginscreenActivity.this,"Invalid Credentials",Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginscreenActivity.this,"Invalid credentials",Toast.LENGTH_LONG).show();
                 }
 
             }

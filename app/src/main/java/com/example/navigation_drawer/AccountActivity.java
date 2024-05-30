@@ -71,7 +71,7 @@ public class AccountActivity extends AppCompatActivity {
     public void AboutUsClick (View view)
     {
         //Accesofaboutus
-        Toast.makeText(this,"AboutusPanel",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"About us panel",Toast.LENGTH_SHORT).show();
 
 
     }
@@ -79,7 +79,7 @@ public class AccountActivity extends AppCompatActivity {
     public void MapsClick (View view)
     {
         //Accesofmaps
-        Toast.makeText(this,"Mapspanel",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"Maps panel",Toast.LENGTH_SHORT).show();
 
 
     }
