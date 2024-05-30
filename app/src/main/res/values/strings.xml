@@ -28,4 +28,12 @@
     <string name="nose">Nose</string>
     <string name="breast">Breast</string>
     <string name="body">Body</string>
+    <string name="face">Face</string>
+    <string name="hair">Hair</string>
+    <string name="skin">Skin</string>
+    <string name="elevateu">ElevateU</string>
+    <string name="login">Login</string>
+    <string name="no_account">I do not have an account</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
 </resources>

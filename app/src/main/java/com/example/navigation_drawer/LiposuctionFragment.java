@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +60,14 @@ public class LiposuctionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_liposuction, container, false);
+        View view = inflater.inflate(R.layout.fragment_liposuction, container, false);
+
+        WebView webView = view.findViewById(R.id.webView3);
+
+        // Loading the local HTML file from assets folder
+        //I have 3 back slashes --> how should I write the path?
+        webView.loadUrl("https://www.mayoclinic.org/tests-procedures/liposuction/about/pac-20384586");
+
+        return view;
     }
 }

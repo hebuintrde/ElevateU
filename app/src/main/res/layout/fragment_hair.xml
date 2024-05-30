@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NoseReconstructionFragment">
+    tools:context=".HairFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,13 +11,13 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/nose_reconstruction_title"
+            android:id="@+id/hair_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />
 
         <WebView
-            android:id="@+id/webView3"
+            android:id="@+id/webView5"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"/>

@@ -7,14 +7,16 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link NoseReconstructionFragment#newInstance} factory method to
+ * Use the {@link SkinFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NoseReconstructionFragment extends Fragment {
+public class SkinFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,7 +27,7 @@ public class NoseReconstructionFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public NoseReconstructionFragment() {
+    public SkinFragment() {
         // Required empty public constructor
     }
 
@@ -35,11 +37,11 @@ public class NoseReconstructionFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment NoseReconstructionFragment.
+     * @return A new instance of fragment SkinFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static NoseReconstructionFragment newInstance(String param1, String param2) {
-        NoseReconstructionFragment fragment = new NoseReconstructionFragment();
+    public static SkinFragment newInstance(String param1, String param2) {
+        SkinFragment fragment = new SkinFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -60,13 +62,17 @@ public class NoseReconstructionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_nose_reconstruction, container, false);
+        View view = inflater.inflate(R.layout.fragment_skin, container, false);
 
-        WebView webView = view.findViewById(R.id.webView2);
+        WebView webView = view.findViewById(R.id.webView6);
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true); // Enable JavaScript if needed
 
-        // Loading the local HTML file from assets folder
-        //I have 3 back slashes --> how should I write the path?
-        webView.loadUrl("https://www.mayoclinic.org/tests-procedures/rhinoplasty/about/pac-20384532");
+        // Set a WebViewClient to handle loading within the WebView
+        webView.setWebViewClient(new WebViewClient());
+
+        // Load the specified URL
+        webView.loadUrl("https://www.mayoclinic.org/tests-procedures/dermabrasion/about/pac-20393764");
 
         return view;
     }

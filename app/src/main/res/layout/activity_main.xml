@@ -5,7 +5,8 @@
     android:id="@+id/drawer_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/main_activity_background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,7 +31,8 @@
             android:text="@string/description_homepage"
             android:gravity="center"
             android:textSize="16sp"
-            android:padding="16dp"/>
+            android:padding="16dp"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -46,6 +48,7 @@
                 android:text="@string/surgical_procedures"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                android:backgroundTint="@color/lila2"
                 />
 
             <Button
@@ -55,6 +58,7 @@
                 android:text="@string/non_surgical_procedures"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                android:backgroundTint="@color/lila2"
                 />
 
         </LinearLayout>

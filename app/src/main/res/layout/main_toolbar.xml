@@ -17,9 +17,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="ElevateU"
+        android:text="@string/elevateu"
         android:textAlignment="center"
-        android:textColor="@color/blue"
+        android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold" />
 
