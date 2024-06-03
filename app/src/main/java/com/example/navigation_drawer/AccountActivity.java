@@ -70,8 +70,12 @@ public class AccountActivity extends AppCompatActivity {
 
     public void AboutUsClick (View view)
     {
-        //Accesofaboutus
-        Toast.makeText(this,"About us panel",Toast.LENGTH_SHORT).show();
+        //Accesofchat
+        Intent aboutUs = new Intent(AccountActivity.this,AboutUsActivity.class);
+        //finish Activity, dont come back
+        aboutUs.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(aboutUs);
+        finish();
 
 
     }
@@ -79,7 +83,12 @@ public class AccountActivity extends AppCompatActivity {
     public void MapsClick (View view)
     {
         //Accesofmaps
-        Toast.makeText(this,"Maps panel",Toast.LENGTH_SHORT).show();
+        //Accesofchat
+        Intent maps = new Intent(AccountActivity.this,MapsActivity.class);
+        //finish Activity, dont come back
+        maps.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(maps);
+        finish();
 
 
     }

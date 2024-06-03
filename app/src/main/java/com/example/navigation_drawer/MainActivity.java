@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
     //i want to use it in another  page (public)
-    //What should it be do, after i click the menu = open the drawer
+    //What should it do, after i click the menu = open the drawer
     public void MenuClick (View view)
     {
         //Connection with Method open the drawer
@@ -103,8 +103,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void AboutUsClick (View view)
     {
-        //Accesofaboutus
-        Toast.makeText(this,"About us panel",Toast.LENGTH_SHORT).show();
+        //Accesofchat
+        Intent aboutUs = new Intent(MainActivity.this,AboutUsActivity.class);
+        //finish Activity, dont come back
+        aboutUs.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(aboutUs);
+        finish();
 
 
     }
@@ -112,7 +116,11 @@ public class MainActivity extends AppCompatActivity {
     public void MapsClick (View view)
     {
         //Accesofmaps
-        Toast.makeText(this,"Maps Panel",Toast.LENGTH_SHORT).show();
+        Intent maps = new Intent(MainActivity.this,MapsActivity.class);
+        //finish Activity, dont come back
+        maps.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(maps);
+        finish();
 
 
     }
