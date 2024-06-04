@@ -5,7 +5,8 @@
     android:id="@+id/drawer_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AboutUsActivity">
+    tools:context=".AboutUsActivity"
+    android:background="@drawable/aboutus_background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,11 +19,51 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="About Us"
+            android:layout_height="wrap_content"
+            android:textColor="@color/lila2"
+            android:text="@string/meet_our_team"
             android:gravity="center"
-            android:textSize="50sp"
-            android:textStyle="bold"/>
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:padding="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/developers"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:padding="16dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/students_of_medical_informatics"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:padding="16dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/email_contact"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:padding="16dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:text="@string/slogan"
+            android:gravity="center"
+            android:padding="16dp"
+            />
 
     </LinearLayout>
 
@@ -38,8 +79,6 @@
 
 
     </RelativeLayout>
-
-
 
 
 </androidx.drawerlayout.widget.DrawerLayout>
