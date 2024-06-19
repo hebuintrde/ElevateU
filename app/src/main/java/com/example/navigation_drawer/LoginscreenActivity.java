@@ -8,18 +8,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.example.navigation_drawer.User.User;
+import com.example.navigation_drawer.User.UserDao;
+import com.example.navigation_drawer.User.UserViewModel;
 
 public class LoginscreenActivity extends AppCompatActivity {
-
-    EditText email, password;
-    Button btnlogin;
-    TextView txtnoaccount;
-    DatabaseHelper DB;
+    private UserViewModel userViewModel;
+    private EditText editEmail, editPassword;
+    private TextView noAccount;
+    private Button loginButton;
 
 
     @Override
@@ -28,47 +28,52 @@ public class LoginscreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_loginscreen);
 
 
-        email=findViewById(R.id.edit_email);
-        password=findViewById(R.id.edit_password);
-        btnlogin=findViewById(R.id.login_btn);
-        txtnoaccount=findViewById(R.id.no_account);
-        DB=new DatabaseHelper(this);
+        editEmail = findViewById(R.id.edit_email);
+        editPassword = findViewById(R.id.edit_password);
+        noAccount = findViewById(R.id.no_account);
+        loginButton = findViewById(R.id.login_btn);
 
 
-        txtnoaccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginscreenActivity.this,SignupActivity.class)
-                );
-            }
-        });
+        loginButton.setOnClickListener(v -> attemptLogin());
+        noAccount.setOnClickListener(v -> startActivity(new Intent(this, SignupActivity.class)));
 
-        btnlogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String email_holder = email.getText().toString();
-                String password_holder = password.getText().toString();
-
-                if(email_holder.isEmpty()||password_holder.isEmpty())
-                {
-                    Toast.makeText(LoginscreenActivity.this,"Fields cannot be empty",Toast.LENGTH_LONG).show();
-
-                }
-                Boolean checkuserpass = DB.checkEmailPassword(email_holder, password_holder);
-                if(checkuserpass == true){
-                    Toast.makeText(LoginscreenActivity.this,"Login successful",Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                    startActivity(intent);
-                }
-                else{
-                    Toast.makeText(LoginscreenActivity.this,"Username or password are invalid!",Toast.LENGTH_LONG).show();
-                }
-
-            }
-
-
-    });
 
     }
+
+    private void attemptLogin() {
+        String email = editEmail.getText().toString();
+        String password = editPassword.getText().toString();
+
+        if (email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Please enter valid credentials", Toast.LENGTH_LONG).show();
+            return;
+        } else {
+
+            authenticatePatient(email, password);
+
+
+        }
+    }
+
+    private void authenticatePatient(String email, String password) {
+        new Thread(() -> {
+            MyDatabase db = MyDatabase.getDatabase(getApplicationContext());
+            UserDao userDao = db.userDao();
+            User user = userDao.findUserByEmailAndPassword(email, password);
+
+            runOnUiThread(() -> {
+                if (user != null) {
+                    Toast.makeText(LoginscreenActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LoginscreenActivity.this, MainActivity.class);
+                    intent.putExtra("user_id", email);  // mit parseInt Methode bekommt man ein int zuruck und das dient als unique ID
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Toast.makeText(LoginscreenActivity.this, "Invalid email number or password", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }).start();
+    }
 }
+
+

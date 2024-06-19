@@ -2,75 +2,102 @@ package com.example.navigation_drawer;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.example.navigation_drawer.User.User;
+import com.example.navigation_drawer.User.UserViewModel;
 
 public class SignupActivity extends AppCompatActivity {
-
-    DatabaseHelper DB;
-    EditText edtName, edtSurname, edtBirthday, edtEmail, edtPassword, confirmPasswords;
-    Button btnregis;
-    TextView txtrAccount;
+    private UserViewModel userViewModel;
+    private EditText editName, editSurname, editBirthday, editEmail, editPassword, editConfirmPassword;
+    private TextView account;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);  // Ensure this matches the XML file name
+        setContentView(R.layout.activity_signup);
 
-        // Initialize views
-        edtName = findViewById(R.id.edit_name);
-        edtSurname = findViewById(R.id.edit_surname);
-        edtBirthday = findViewById(R.id.edit_birthday);
-        edtEmail = findViewById(R.id.edit_emailr);
-        edtPassword = findViewById(R.id.edit_passwordr);
-        confirmPasswords = findViewById(R.id.signupconfirm);
-        btnregis = findViewById(R.id.register_btn);
-        txtrAccount = findViewById(R.id.an_account);
-        DB = new DatabaseHelper(this);
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
-        btnregis.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String name = edtName.getText().toString();
-                String surname = edtSurname.getText().toString();
-                String birthday = edtBirthday.getText().toString();
-                String email = edtEmail.getText().toString();
-                String password = edtPassword.getText().toString();
-                String confirmPassword = confirmPasswords.getText().toString();
+        editName = findViewById(R.id.edit_name);
+        editSurname = findViewById(R.id.edit_surname);
+        editBirthday = findViewById(R.id.edit_birthday);
+        editEmail = findViewById(R.id.edit_emailr);
+        editPassword = findViewById(R.id.edit_passwordr);
+        editConfirmPassword = findViewById(R.id.signupconfirm);
+        account = findViewById(R.id.an_account);
 
-                if (name.isEmpty() || surname.isEmpty() || email.isEmpty() || password.isEmpty() || birthday.isEmpty()) {
-                    Toast.makeText(SignupActivity.this, "Fields cannot be empty", Toast.LENGTH_LONG).show();
-                } else {
-                    if (password.equals(confirmPassword)) {
-                        Boolean checkUserEmail = DB.checkEmail(email);
-                        if (!checkUserEmail) {
-                            Boolean insert = DB.insertData(email, password);
-                            if (insert) {
-                                Toast.makeText(SignupActivity.this, "Registered Successfully", Toast.LENGTH_LONG).show();
-                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                            } else {
-                                Toast.makeText(SignupActivity.this, "Registration Failed", Toast.LENGTH_LONG).show();
-                            }
-                        } else {
-                            Toast.makeText(SignupActivity.this, "User already exists, Please Login", Toast.LENGTH_LONG).show();
-                        }
-                    } else {
-                        Toast.makeText(SignupActivity.this, "Invalid Password", Toast.LENGTH_LONG).show();
-                    }
-                }
+        findViewById(R.id.register_btn).setOnClickListener(v -> registerUser());
+
+        // Set up click listener for the "I have an account" TextView
+        account.setOnClickListener(v -> navigateToLogin());
+    }
+
+    private void registerUser() {
+        String name = editName.getText().toString();
+        String surname = editSurname.getText().toString();
+        String birthday = editBirthday.getText().toString();
+        String email = editEmail.getText().toString();
+        String password = editPassword.getText().toString();
+        String confirmPassword = editConfirmPassword.getText().toString();
+        String anaccount = account.getText().toString();
+
+        if (!validateInput(name, surname, birthday, email, password, confirmPassword)) {
+            return;
+        }
+
+        if (!password.equals(confirmPassword)) {
+            Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        userViewModel.isEmailExists(email).observe(this, emailExists -> {
+            if (emailExists != null && emailExists > 0) {
+                Toast.makeText(this, "Email already registered", Toast.LENGTH_SHORT).show();
+            } else {
+                User user = new User();
+                user.setFirstName(name);
+                user.setLastName(surname);
+                user.setBirthday(birthday);
+                user.setEmail(email);
+                user.setPassword(password);
+
+                userViewModel.insert(user);
+                Toast.makeText(this, "User Registered", Toast.LENGTH_SHORT).show();
+                finish();
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
             }
         });
 
-        txtrAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), LoginscreenActivity.class));
-            }
-        });
+    }
+
+    private boolean validateInput(String name, String surname, String birthdate, String email, String password, String confirmPassword) {
+        if (name.isEmpty() || surname.isEmpty() || birthdate.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+            Toast.makeText(this, "Invalid email address", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (!birthdate.matches("\\d{2}\\.\\d{2}\\.\\d{4}")) {
+            Toast.makeText(this, "Birthdate must be in the format DD.MM.YYYY", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
+    }
+
+    private void navigateToLogin() {
+        Intent intent = new Intent(this, LoginscreenActivity.class);
+        startActivity(intent);
     }
 }
