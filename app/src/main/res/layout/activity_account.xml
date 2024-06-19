@@ -35,7 +35,7 @@
         android:layout_height="match_parent"
         android:background="@android:color/white"
         android:layout_gravity="start">
-
+        
         <include
             layout="@layout/menu_nawigation_drawer"/>
 

@@ -5,18 +5,31 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-public class MapsActivity extends AppCompatActivity {
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     DrawerLayout drawer;
+    private GoogleMap myMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        //I needed to cast this SupportMapFragment to MapFragment
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
 
         drawer = findViewById(R.id.drawer_background);
     }
@@ -77,5 +90,25 @@ public class MapsActivity extends AppCompatActivity {
     protected void onPause() {
         MainActivity.closethedrawer(drawer);
         super.onPause();
+    }
+
+
+    //if we want to load our map on onCreate, Google Maps take some ms to load
+    // if we click on onCreate, it gives us NullPointer Exception (access smth that does not exist)
+    @Override
+    public void onMapReady(@NonNull GoogleMap googleMap) {
+
+        //initialize myMap (equal to Google Map)
+        myMap = googleMap;
+
+        //Add latitude and longitude
+        //Generate some Lat and Lng --> SYDNEY
+        LatLng sydney = new LatLng(-34, 151);
+        myMap.addMarker(new MarkerOptions().position(sydney).title("Sydney"));
+        myMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+
+
+
     }
 }

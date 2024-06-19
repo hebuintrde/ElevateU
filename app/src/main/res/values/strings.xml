@@ -43,4 +43,6 @@
     <string name="developers">Developers: Lana Cvijic and Beyza Arbaz</string>
     <string name="slogan">Beauty, informed! - ElevateU</string>
     <string name="my_account">My account</string>
+
+    <string name="my_map_api_key">AIzaSyAvun4SVfoN0EkjEBmQ3fRRpFpbdALFTu4</string>
 </resources>
