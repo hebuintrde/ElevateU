@@ -1,16 +1,21 @@
 package com.example.navigation_drawer;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.core.app.ActivityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -25,49 +30,92 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+import java.io.IOException;
+import java.util.List;
+
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
+    private static final String TAG = "MapsActivity";
     DrawerLayout drawer;
     private GoogleMap myMap;
     private final int FINE_PERMISSION_CODE = 1;
     Location currentLocation;
     FusedLocationProviderClient fusedLocationProviderClient;
 
+    private SearchView mapSearchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        //initialize fusedLocationProviderClient
+        mapSearchView = findViewById(R.id.mapSearch);
+        mapSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                String location = mapSearchView.getQuery().toString();
+                List<Address> addressList = null;
+
+                if (location != null && !location.isEmpty()) {
+                    Geocoder geocoder = new Geocoder(MapsActivity.this);
+                    try {
+                        addressList = geocoder.getFromLocationName(location, 1);
+                    } catch (IOException e) {
+                        Log.e(TAG, "Geocoder IOException", e);
+                    }
+
+                    if (addressList != null && !addressList.isEmpty()) {
+                        Address address = addressList.get(0);
+                        LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                        myMap.addMarker(new MarkerOptions().position(latLng).title(location));
+                        myMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
+                    } else {
+                        Toast.makeText(MapsActivity.this, "Location not found", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        if (mapFragment != null) {
+            mapFragment.getMapAsync(this);
+        } else {
+            Log.e(TAG, "SupportMapFragment is null");
+        }
+
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         getLastLocation();
-
-
-        //I needed to cast this SupportMapFragment to MapFragment
-
 
         drawer = findViewById(R.id.drawer_background);
     }
 
     private void getLastLocation() {
-        //in this method, we will get the current location
-
-        //what does this chech do?
-        //it asks for fine location permission and coarse location permission
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, FINE_PERMISSION_CODE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, FINE_PERMISSION_CODE);
             return;
         }
+
         Task<Location> task = fusedLocationProviderClient.getLastLocation();
         task.addOnSuccessListener(new OnSuccessListener<Location>() {
             @Override
             public void onSuccess(Location location) {
-                if (location != null){
+                if (location != null) {
                     currentLocation = location;
-
-                    SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-                    mapFragment.getMapAsync(MapsActivity.this);
+                    if (myMap != null) {
+                        LatLng currentLatLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+                        myMap.addMarker(new MarkerOptions().position(currentLatLng).title("Current Location"));
+                        myMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15));
+                    } else {
+                        Log.e(TAG, "GoogleMap is null");
+                    }
+                } else {
+                    Log.e(TAG, "Location is null");
                 }
             }
         });
@@ -131,34 +179,24 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onPause();
     }
 
-
-    //if we want to load our map on onCreate, Google Maps take some ms to load
-    // if we click on onCreate, it gives us NullPointer Exception (access smth that does not exist)
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
-
-        //initialize myMap (equal to Google Map)
         myMap = googleMap;
-
-        //Add latitude and longitude
-        //Generate some Lat and Lng --> SYDNEY
-        //in this method, we are just getting the coordinated (red marker) placed on Sydney in GoogleMaps
-        //next -- we need to get the current location of user
-        //I will also try this with LatLng for Vienna, Austria
-        LatLng sydney = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-        myMap.addMarker(new MarkerOptions().position(sydney).title("My Location"));
-        myMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-
+        if (currentLocation != null) {
+            LatLng currentLatLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+            myMap.addMarker(new MarkerOptions().position(currentLatLng).title("Current Location"));
+            myMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15));
+        }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == FINE_PERMISSION_CODE){
-            if (grantResults.length > 0 && grantResults[0]== PackageManager.PERMISSION_GRANTED){
+        if (requestCode == FINE_PERMISSION_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 getLastLocation();
-            }else{
-                Toast.makeText(this, "Location permission is denied, please allow the permission to acces the location.", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Location permission is denied, please allow the permission to access the location.", Toast.LENGTH_SHORT).show();
             }
         }
     }

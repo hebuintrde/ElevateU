@@ -55,6 +55,7 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation("com.google.android.gms:play-services-maps:18.2.0")
     implementation("com.google.android.gms:play-services-location:21.3.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.0.4")
 }
 
 
