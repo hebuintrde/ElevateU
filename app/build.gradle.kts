@@ -43,6 +43,8 @@ dependencies {
 
     implementation("androidx.room:room-runtime:$room_version")
     annotationProcessor("androidx.room:room-compiler:$room_version")
+    implementation("androidx.drawerlayout:drawerlayout:1.2.0")
+    implementation("androidx.gridlayout:gridlayout:1.0.0")
 
     implementation(libs.appcompat)
     implementation(libs.material)

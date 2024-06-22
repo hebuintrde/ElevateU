@@ -10,36 +10,59 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:orientation="vertical">
 
-        <include
-            layout="@layout/main_toolbar"/>
-
         <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="80dp"
+            android:text="Select a Doctor"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+
+        <androidx.gridlayout.widget.GridLayout
+            android:id="@+id/gridLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="32dp">
+
+
+        </androidx.gridlayout.widget.GridLayout>
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="60dp"
             android:text="Chat"
-            android:gravity="center"
-            android:textSize="50sp"
-            android:textStyle="bold"/>
+            android:backgroundTint="@color/black"
+            android:layout_marginLeft="110dp"
+            android:textColor="@color/white"
+            android:padding="18dp"
+            android:layout_marginTop="32dp"
+            android:textSize="15dp"
+            android:id="@+id/chat_button"/>
+
 
     </LinearLayout>
 
+    <include
+        layout="@layout/main_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <RelativeLayout
         android:layout_width="300dp"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
-        android:layout_gravity="start">
-
+        android:layout_gravity="start"
+        android:background="@android:color/white">
         <include
             layout="@layout/menu_nawigation_drawer"/>
 
-
     </RelativeLayout>
 
-
-
-
 </androidx.drawerlayout.widget.DrawerLayout>
+
+
+    <!-- Doctor information will be added here dynamically -->

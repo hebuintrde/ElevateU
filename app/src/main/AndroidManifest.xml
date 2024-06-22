@@ -18,6 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Navigation_Drawer"
         tools:targetApi="31">
+        <activity android:name=".Message.Message" />
         <activity
             android:name=".SurgicalProceduresDescriptions"
             android:exported="false"

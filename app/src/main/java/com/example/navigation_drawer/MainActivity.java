@@ -3,6 +3,7 @@ package com.example.navigation_drawer;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -11,6 +12,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.example.navigation_drawer.Doctor.Doctor;
+
+import java.util.List;
+import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
     private Button openSurgicalProceduresActivity;
@@ -22,6 +28,25 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        MyDatabase db = MyDatabase.getDatabase(this);
+
+
+        Executors.newSingleThreadExecutor().execute(() -> {
+            db.doctorDao().insert(new Doctor("Dr. John Doe", "Plastic Surgeon", "url_to_photo1"));
+            db.doctorDao().insert(new Doctor("Dr. Jane Smith", "Dermatologist", "url_to_photo2"));
+
+            List<Doctor> doctors = db.doctorDao().getAllDoctors();
+            for (Doctor doctor : doctors) {
+                Log.d("Doctor", doctor.getName() + ", " + doctor.getSpecialization());
+            }
+
+
+        });
+
+
+
+
         drawer=findViewById(R.id.drawer_background);
 
         openSurgicalProceduresActivity = findViewById(R.id.surgical_button);
