@@ -1,17 +1,10 @@
-package com.example.navigation_drawer;
+package com.example.navigation_drawer.Maps;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
-import com.google.android.gms.location.LocationRequest;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,17 +14,22 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.navigation_drawer.AboutUsActivity;
+import com.example.navigation_drawer.AccountActivity;
+import com.example.navigation_drawer.ChatActivity;
+import com.example.navigation_drawer.MainActivity;
+import com.example.navigation_drawer.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
@@ -40,13 +38,11 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,64 +51,22 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         LocationListener {
 
     private DrawerLayout drawer;
-    //handles API requests to Google Play services
     private GoogleApiClient mGoogleApiClient;
     private GoogleMap mMap;
     private Location mylocation;
     double currentLatitude, currentLongitude;
-    //request codes for permissions and settings
     private final static int REQUEST_ID_MULTIPLE_PERMISSIONS = 0x2;
     private final static int REQUEST_CHECK_SETTINGS_GPS = 0x1;
     private Marker currentLocationMarker;
-    private SearchView mapSearchView;
-    //tag for logging purposes
-    private static final String TAG = "MapsActivity";
 
-    /*
-    onCreate Method:
-    Initializes the activity and sets the content view.
-    Sets up the navigation drawer and search view.
-    Initializes the GoogleApiClient for location services.
-    Connects the GoogleApiClient.
- */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        drawer = findViewById(R.id.drawer_background); // Assuming you have a DrawerLayout in your layout XML
-        mapSearchView = findViewById(R.id.mapSearch);
-        mapSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                String location = mapSearchView.getQuery().toString();
-                List<Address> addressList = null;
+        drawer = findViewById(R.id.drawer_background);
 
-                if (location != null && !location.isEmpty()) {
-                    Geocoder geocoder = new Geocoder(MapsActivity.this);
-                    try {
-                        addressList = geocoder.getFromLocationName(location, 1);
-                    } catch (IOException e) {
-                        Log.e(TAG, "Geocoder IOException", e);
-                    }
-
-                    if (addressList != null && !addressList.isEmpty()) {
-                        Address address = addressList.get(0);
-                        LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
-                        mMap.addMarker(new MarkerOptions().position(latLng).title(location));
-                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
-                    } else {
-                        Toast.makeText(MapsActivity.this, "Location not found", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -130,89 +84,62 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Connect GoogleApiClient
         if (mGoogleApiClient != null) {
             mGoogleApiClient.connect();
-
         }
     }
 
-    /*
-    Called when the map is ready to be used.
-    Enables the location layer if permissions are granted, otherwise requests permissions.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Enable location layer
+        // Enable location layer if permissions are granted
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
         } else {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_ID_MULTIPLE_PERMISSIONS);
         }
-    }
 
-    public void MenuClick(View view) {
-        MainActivity.openthedrawer(drawer);
-    }
+        // Set the initial location to Graz and add markers for clinics
+        LatLng graz = new LatLng(47.0707, 15.4395);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(graz, 12));
 
-    public void LogoClick(View view) {
-        MainActivity.closethedrawer(drawer);
-    }
+        // Add markers for the clinics
+        List<Clinic> clinics = getClinics();
 
-    public void HomePageClick(View view) {
-        Intent homepage = new Intent(MapsActivity.this, MainActivity.class);
-        startActivity(homepage);
-    }
-
-    public void AccountClick(View view) {
-        Intent account = new Intent(MapsActivity.this, AccountActivity.class);
-        startActivity(account);
-    }
-
-    public void ChatClick(View view) {
-        Intent chat = new Intent(MapsActivity.this, ChatActivity.class);
-        startActivity(chat);
-    }
-
-    public void AboutUsClick(View view) {
-        Intent aboutUs = new Intent(MapsActivity.this, AboutUsActivity.class);
-        startActivity(aboutUs);
-    }
-
-    public void MapsClick(View view) {
-        recreate();
-    }
-
-    public void ExitClick(View view) {
-        AlertDialog.Builder warningwindow = new AlertDialog.Builder(MapsActivity.this);
-        warningwindow.setTitle("Exit");
-        warningwindow.setMessage("Are you sure you want to sign out?");
-        warningwindow.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                finishAffinity();
-                System.exit(0);
+        for (Clinic clinic : clinics) {
+            // Customize markers based on whether it's the current location or a clinic
+            if (clinic.getName().equals("Your current location")) {
+                // This is the marker for current location
+                currentLocationMarker = mMap.addMarker(new MarkerOptions()
+                        .position(clinic.getLocation())
+                        .title(clinic.getName())
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))); // Use green color for current location
+            } else {
+                // This is a marker for a clinic
+                mMap.addMarker(new MarkerOptions()
+                        .position(clinic.getLocation())
+                        .title(clinic.getName())
+                        .snippet(clinic.getDescription())
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE))); // Set color to pink for clinics
             }
-        });
-        warningwindow.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
-        warningwindow.show();
+        }
     }
     /*
-    onPause: Closes the drawer when the activity is paused.
-    onConnected: Called when the GoogleApiClient is connected, checks for location permissions.
-    checkPermission: Checks and requests location permissions.
-    onConnectionSuspended, onConnectionFailed: Handle connection suspension and failure.
-    onRequestPermissionsResult: Handles the result of permission requests.
+    In this method I defined the clinics in Graz
+    In the future, other places can be added
      */
 
-    @Override
-    protected void onPause() {
-        MainActivity.closethedrawer(drawer);
-        super.onPause();
+    private List<Clinic> getClinics() {
+        List<Clinic> clinics = new ArrayList<>();
+        // Add the coordinates, names, and descriptions of the clinics in Graz
+        clinics.add(new Clinic(new LatLng(47.0717455, 15.3552233), "M1 Med Beauty Graz", "Botox and fillers"));
+        clinics.add(new Clinic(new LatLng(47.0345404, 15.3492954), "The Graz Clinic for Aesthetic Surgery", "Rhinoplasty and liposuction"));
+        clinics.add(new Clinic(new LatLng(47.070473, 15.3633478), "Plastic Surgeon - Dr. Martin Grohmann", "Breast augmentation"));
+        clinics.add(new Clinic(new LatLng(47.0754391, 15.3524217), "Surgeon's practice: Dr. Thomas Rappl ", "Nose reconstruction"));
+        clinics.add(new Clinic(new LatLng(47.0754105, 15.3524195), "MA-RA Medical Aesthetic Research Academy ", "Liposuction and breast reduction"));
+        clinics.add(new Clinic(new LatLng(47.0772466, 15.3932702), "Center for plastic surgery - Univ. Doz. Dr. Franz Maria Haas ", "Aesthetic surgery for men"));
+        clinics.add(new Clinic(new LatLng(47.0690047, 15.3667976), "Surgeon's practice: Priv.-Doz. DDr. Raimund Winter", "Dermatology and hyaluron filler"));
+        // We can add more clinics as needed
+        return clinics;
     }
 
     @Override
@@ -244,12 +171,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Handle connection failure if needed
     }
 
-    /*
-    onLocationChanged: Called when the location changes, updates the current location marker, and finds nearby hospitals.
-    getMyLocation: Requests location updates and checks location settings.
-    createLocationRequest: Creates a LocationRequest object.
-    checkLocationSettings: Checks and prompts the user to enable location settings if necessary.
-     */
     @Override
     public void onLocationChanged(@NonNull Location location) {
         mylocation = location;
@@ -263,24 +184,21 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 currentLocationMarker.remove();
             }
 
-            // Resize the icon
-            BitmapDescriptor icon = getResizedBitmapDescriptor(R.drawable.pin_map, 100, 100); // Adjust width and height as needed
-
-            // Add the new marker
+            // Add the new marker for current location with green color
             LatLng currentLatLng = new LatLng(currentLatitude, currentLongitude);
             MarkerOptions markerOptions = new MarkerOptions()
                     .position(currentLatLng)
                     .title("Your current location")
-                    .icon(icon);
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)); // Use green color
             currentLocationMarker = mMap.addMarker(markerOptions);
 
             // Move the camera
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15.0f));
-
-            // Find nearby hospitals
-            getNearbyHospitals();
         }
     }
+
+
+
     private void getMyLocation() {
         if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
             int permissionLocation = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
@@ -336,36 +254,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
     }
 
-    /*
-    getResizedBitmapDescriptor: Resizes a bitmap to use as a marker icon.
-    getNearbyHospitals: Constructs a URL to request nearby hospitals from the Google Places API and executes the request using GetNearbyPlacesData.
-     */
-
-    private BitmapDescriptor getResizedBitmapDescriptor(int drawableResId, int width, int height) {
-        Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(), drawableResId);
-        Bitmap resizedBitmap = Bitmap.createScaledBitmap(imageBitmap, width, height, false);
-        return BitmapDescriptorFactory.fromBitmap(resizedBitmap);
-    }
-
-
-    private void getNearbyHospitals() {
-        StringBuilder stringBuilder = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
-        stringBuilder.append("location=" + currentLatitude + "," + currentLongitude);
-        stringBuilder.append("&radius=5000"); // Adjust radius as needed
-        stringBuilder.append("&type=hospital");
-        stringBuilder.append("&key=" + getResources().getString(R.string.my_map_api_key)); // Replace with your actual API key
-
-        String url = stringBuilder.toString();
-
-        Object[] dataTransfer = new Object[2];
-        dataTransfer[0] = mMap;
-        dataTransfer[1] = url;
-
-        GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
-        getNearbyPlacesData.execute(dataTransfer);
-    }
-
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -378,4 +266,55 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
+    // navigation drawer methods
+    public void MenuClick(View view) {
+        MainActivity.openthedrawer(drawer);
+    }
+
+    public void LogoClick(View view) {
+        MainActivity.closethedrawer(drawer);
+    }
+
+    public void HomePageClick(View view) {
+        Intent homepage = new Intent(MapsActivity.this, MainActivity.class);
+        startActivity(homepage);
+    }
+
+    public void AccountClick(View view) {
+        Intent account = new Intent(MapsActivity.this, AccountActivity.class);
+        startActivity(account);
+    }
+
+    public void ChatClick(View view) {
+        Intent chat = new Intent(MapsActivity.this, ChatActivity.class);
+        startActivity(chat);
+    }
+
+    public void AboutUsClick(View view) {
+        Intent aboutUs = new Intent(MapsActivity.this, AboutUsActivity.class);
+        startActivity(aboutUs);
+    }
+
+    public void MapsClick(View view) {
+        recreate();
+    }
+
+    public void ExitClick(View view) {
+        AlertDialog.Builder warningwindow = new AlertDialog.Builder(MapsActivity.this);
+        warningwindow.setTitle("Exit");
+        warningwindow.setMessage("Are you sure you want to sign out?");
+        warningwindow.setPositiveButton("YES", (dialogInterface, i) -> {
+            finishAffinity();
+            System.exit(0);
+        });
+        warningwindow.setNegativeButton("NO", (dialogInterface, i) -> dialogInterface.dismiss());
+        warningwindow.show();
+    }
+
+    @Override
+    protected void onPause() {
+        MainActivity.closethedrawer(drawer);
+        super.onPause();
+    }
 }
+

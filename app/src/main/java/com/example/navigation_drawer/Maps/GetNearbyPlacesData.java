@@ -1,7 +1,9 @@
-package com.example.navigation_drawer;
+/*
+package com.example.navigation_drawer.Maps;
 
 import android.os.AsyncTask;
 
+import com.example.navigation_drawer.Maps.DownloadUrl;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -18,11 +20,6 @@ public class GetNearbyPlacesData extends AsyncTask<Object, String, String> {
     GoogleMap googleMap;
     String url;
 
-    /*
-    Takes the GoogleMap object and URL as parameters.
-    Uses DownloadUrl to read data from the provided URL.
-    Returns the data as a string.
-     */
     @Override
     protected String doInBackground(Object... objects) {
         googleMap = (GoogleMap) objects[0];
@@ -37,11 +34,6 @@ public class GetNearbyPlacesData extends AsyncTask<Object, String, String> {
         return googlePlacesData;
     }
 
-    /*
-    Parses the JSON response.
-    Extracts location and name information for each result.
-    Adds markers to the GoogleMap object for each location.
-     */
     @Override
     protected void onPostExecute(String s) {
         try {
@@ -70,3 +62,6 @@ public class GetNearbyPlacesData extends AsyncTask<Object, String, String> {
         }
     }
 }
+ */
+
+

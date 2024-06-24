@@ -4,15 +4,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.example.navigation_drawer.Maps.MapsActivity;
 
 public class AccountActivity extends AppCompatActivity {
 
@@ -84,7 +81,7 @@ public class AccountActivity extends AppCompatActivity {
     {
         //Accesofmaps
         //Accesofchat
-        Intent maps = new Intent(AccountActivity.this,MapsActivity.class);
+        Intent maps = new Intent(AccountActivity.this, MapsActivity.class);
         //finish Activity, dont come back
         maps.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(maps);

@@ -1,5 +1,6 @@
-package com.example.navigation_drawer;
+package com.example.navigation_drawer.Maps;
 
+/*
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -12,10 +13,6 @@ import java.net.URL;
 
 public class DownloadUrl {
 
-    /*
-    Takes a URL string and reads data from it.
-    Connects to the URL, reads the response into a string, and returns it.
-     */
     public String readUrl(String myUrl) throws IOException {
         String data = "";
         InputStream inputStream = null;
@@ -52,3 +49,6 @@ public class DownloadUrl {
         return data;
     }
 }
+
+ */
+

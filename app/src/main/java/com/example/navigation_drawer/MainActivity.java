@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +13,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.navigation_drawer.Doctor.Doctor;
+import com.example.navigation_drawer.Maps.MapsActivity;
 
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
     public void MapsClick (View view)
     {
         //Accesofmaps
-        Intent maps = new Intent(MainActivity.this,MapsActivity.class);
+        Intent maps = new Intent(MainActivity.this, MapsActivity.class);
         //finish Activity, dont come back
         maps.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(maps);

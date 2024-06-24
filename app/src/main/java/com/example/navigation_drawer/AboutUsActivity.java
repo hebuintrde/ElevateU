@@ -9,6 +9,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.navigation_drawer.Maps.MapsActivity;
+
 public class AboutUsActivity extends AppCompatActivity {
 
     DrawerLayout drawer;

@@ -45,7 +45,7 @@
             android:name=".ChatActivity"
             android:exported="false" />
         <activity
-            android:name=".MapsActivity"
+            android:name=".Maps.MapsActivity"
             android:exported="false" />
         <activity
             android:name=".AboutUsActivity"

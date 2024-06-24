@@ -16,6 +16,7 @@ import androidx.gridlayout.widget.GridLayout;
 
 import com.example.navigation_drawer.Doctor.Doctor;
 import com.example.navigation_drawer.Doctor.DoctorDetailActivity;
+import com.example.navigation_drawer.Maps.MapsActivity;
 import com.example.navigation_drawer.Message.Message;
 
 import java.util.List;

@@ -5,7 +5,7 @@
     android:id="@+id/drawer_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MapsActivity">
+    tools:context=".Maps.MapsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,17 +20,6 @@
             android:layout_height="wrap_content">
 
             <!-- App Name -->
-            <TextView
-                android:id="@+id/app_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ElevateU"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:padding="16dp" />
 
             <!-- App Icon -->
             <ImageView
@@ -40,19 +29,6 @@
                 android:src="@drawable/bg_search_view" />
 
             <!-- SearchView -->
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/mapSearch"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:queryHint="Search..."
-                android:iconifiedByDefault="false"
-                android:elevation="5dp"
-                android:background="@android:color/white"
-                app:layout_constraintTop_toBottomOf="@id/app_icon"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:padding="8dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
