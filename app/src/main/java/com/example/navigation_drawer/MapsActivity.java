@@ -55,17 +55,26 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         LocationListener {
 
     private DrawerLayout drawer;
+    //handles API requests to Google Play services
     private GoogleApiClient mGoogleApiClient;
     private GoogleMap mMap;
     private Location mylocation;
     double currentLatitude, currentLongitude;
+    //request codes for permissions and settings
     private final static int REQUEST_ID_MULTIPLE_PERMISSIONS = 0x2;
     private final static int REQUEST_CHECK_SETTINGS_GPS = 0x1;
     private Marker currentLocationMarker;
     private SearchView mapSearchView;
+    //tag for logging purposes
     private static final String TAG = "MapsActivity";
 
-
+    /*
+    onCreate Method:
+    Initializes the activity and sets the content view.
+    Sets up the navigation drawer and search view.
+    Initializes the GoogleApiClient for location services.
+    Connects the GoogleApiClient.
+ */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,6 +134,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
+    /*
+    Called when the map is ready to be used.
+    Enables the location layer if permissions are granted, otherwise requests permissions.
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -188,6 +201,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
         warningwindow.show();
     }
+    /*
+    onPause: Closes the drawer when the activity is paused.
+    onConnected: Called when the GoogleApiClient is connected, checks for location permissions.
+    checkPermission: Checks and requests location permissions.
+    onConnectionSuspended, onConnectionFailed: Handle connection suspension and failure.
+    onRequestPermissionsResult: Handles the result of permission requests.
+     */
 
     @Override
     protected void onPause() {
@@ -224,7 +244,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Handle connection failure if needed
     }
 
-
+    /*
+    onLocationChanged: Called when the location changes, updates the current location marker, and finds nearby hospitals.
+    getMyLocation: Requests location updates and checks location settings.
+    createLocationRequest: Creates a LocationRequest object.
+    checkLocationSettings: Checks and prompts the user to enable location settings if necessary.
+     */
     @Override
     public void onLocationChanged(@NonNull Location location) {
         mylocation = location;
@@ -256,33 +281,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             getNearbyHospitals();
         }
     }
-
-
-    private BitmapDescriptor getResizedBitmapDescriptor(int drawableResId, int width, int height) {
-        Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(), drawableResId);
-        Bitmap resizedBitmap = Bitmap.createScaledBitmap(imageBitmap, width, height, false);
-        return BitmapDescriptorFactory.fromBitmap(resizedBitmap);
-    }
-
-
-    private void getNearbyHospitals() {
-        StringBuilder stringBuilder = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
-        stringBuilder.append("location=" + currentLatitude + "," + currentLongitude);
-        stringBuilder.append("&radius=1000"); // Adjust radius as needed
-        stringBuilder.append("&type=hospital");
-        stringBuilder.append("&key=" + getResources().getString(R.string.my_map_api_key)); // Replace with your actual API key
-
-        String url = stringBuilder.toString();
-
-        Object[] dataTransfer = new Object[2];
-        dataTransfer[0] = mMap;
-        dataTransfer[1] = url;
-
-        GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
-        getNearbyPlacesData.execute(dataTransfer);
-    }
-
-
     private void getMyLocation() {
         if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
             int permissionLocation = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
@@ -324,7 +322,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         break;
                     case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
                         // Location settings are not satisfied. Show the user a dialog
-                      try {
+                        try {
                             status.startResolutionForResult(MapsActivity.this, REQUEST_CHECK_SETTINGS_GPS);
                         } catch (IntentSender.SendIntentException e) {
                             e.printStackTrace();
@@ -337,6 +335,36 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
     }
+
+    /*
+    getResizedBitmapDescriptor: Resizes a bitmap to use as a marker icon.
+    getNearbyHospitals: Constructs a URL to request nearby hospitals from the Google Places API and executes the request using GetNearbyPlacesData.
+     */
+
+    private BitmapDescriptor getResizedBitmapDescriptor(int drawableResId, int width, int height) {
+        Bitmap imageBitmap = BitmapFactory.decodeResource(getResources(), drawableResId);
+        Bitmap resizedBitmap = Bitmap.createScaledBitmap(imageBitmap, width, height, false);
+        return BitmapDescriptorFactory.fromBitmap(resizedBitmap);
+    }
+
+
+    private void getNearbyHospitals() {
+        StringBuilder stringBuilder = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
+        stringBuilder.append("location=" + currentLatitude + "," + currentLongitude);
+        stringBuilder.append("&radius=5000"); // Adjust radius as needed
+        stringBuilder.append("&type=hospital");
+        stringBuilder.append("&key=" + getResources().getString(R.string.my_map_api_key)); // Replace with your actual API key
+
+        String url = stringBuilder.toString();
+
+        Object[] dataTransfer = new Object[2];
+        dataTransfer[0] = mMap;
+        dataTransfer[1] = url;
+
+        GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
+        getNearbyPlacesData.execute(dataTransfer);
+    }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
