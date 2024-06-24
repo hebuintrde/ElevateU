@@ -1,4 +1,4 @@
-package com.example.navigation_drawer;
+package com.example.navigation_drawer.SurgicalProcedures;
 
 import android.os.Bundle;
 import android.widget.FrameLayout;
@@ -11,54 +11,60 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.navigation_drawer.R;
+import com.example.navigation_drawer.SurgicalProcedures.BreastAugmentationFragment;
+import com.example.navigation_drawer.SurgicalProcedures.LiposuctionFragment;
+import com.example.navigation_drawer.SurgicalProcedures.NoseReconstructionFragment;
 import com.google.android.material.tabs.TabLayout;
 
-public class NonSurgicalProceduresDescriptions extends AppCompatActivity {
+public class SurgicalProceduresDescriptions extends AppCompatActivity {
 
-    FrameLayout frameLayout_nonSurgical;
-    TabLayout tabLayout_nonSurgical;
+    FrameLayout frameLayout;
+    TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_non_surgical_procedures_descriptions);
+        setContentView(R.layout.activity_surgical_procedures_descriptions2);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        frameLayout_nonSurgical = (FrameLayout) findViewById(R.id.frameLayout2);
-        tabLayout_nonSurgical = (TabLayout) findViewById(R.id.tabLayout2);
+        frameLayout = (FrameLayout) findViewById(R.id.frameLayout);
+        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
 
         //when we open the activity for the first time, it opens the fragment about nose reconstruction
-        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout2, new NoseReconstructionFragment())
+        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new NoseReconstructionFragment())
                 .addToBackStack(null)
                 .commit();
 
-        tabLayout_nonSurgical.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
 
-                Fragment fragment1 = null;
+
+                Fragment fragment = null;
                 switch (tab.getPosition()){
                     case 0:
-                        fragment1 = new FaceFragment();
+                        fragment = new NoseReconstructionFragment();
                         break;
                     case 1:
-                        fragment1 = new HairFragment();
+                        fragment = new BreastAugmentationFragment();
                         break;
                     case 2:
-                        fragment1 = new SkinFragment();
+                        fragment = new LiposuctionFragment();
                         break;
                 }
 
-                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout2, fragment1)
+                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment)
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                         .commit();
 
             }
+
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
 

@@ -2,8 +2,10 @@ package com.example.navigation_drawer;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,120 +16,107 @@ import com.example.navigation_drawer.Maps.MapsActivity;
 public class AccountActivity extends AppCompatActivity {
 
     DrawerLayout drawer;
+    SharedPreferences sharedPreferences;
 
+    private static final String SHARED_PREF_NAME = "mypref";
+    private static final String KEY_NAME = "name";
+    private static final String KEY_EMAIL = "email";
+    private TextView textName, textEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
 
+        drawer = findViewById(R.id.drawer_background);
+        textName = findViewById(R.id.text_name);
+        textEmail = findViewById(R.id.text_email);
 
-        drawer=findViewById(R.id.drawer_background);
+        sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
 
+        // Retrieve and display user information
+        String name = sharedPreferences.getString(KEY_NAME, "N/A");
+        String email = sharedPreferences.getString(KEY_EMAIL, "N/A");
+
+        textName.setText(name);
+        textEmail.setText(email);
     }
 
-    public void MenuClick (View view)
-    {
-        //Open the drawer that stand in main Activity
+    public void MenuClick(View view) {
+        // Open the drawer
         MainActivity.openthedrawer(drawer);
     }
 
-    public void LogoClick(View view)
-    {
-
+    public void LogoClick(View view) {
+        // Close the drawer
         MainActivity.closethedrawer(drawer);
     }
 
-    public void HomePageClick (View view)
-    {
-        //Switching between pages
-        Intent homepage = new Intent(AccountActivity.this,MainActivity.class);
-        homepage.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+    public void HomePageClick(View view) {
+        // Switch to the Home Page
+        Intent homepage = new Intent(AccountActivity.this, MainActivity.class);
+        homepage.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(homepage);
         finish();
-
     }
 
-    public void AccountClick (View view)
-    {
+    public void AccountClick(View view) {
+        // Recreate the current activity
         recreate();
-
     }
 
-    public void ChatClick (View view)
-    {
-        //Accesofchat
-        Intent chat = new Intent(AccountActivity.this,ChatActivity.class);
-        //finish Activity, dont come back
-        chat.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+    public void ChatClick(View view) {
+        // Switch to the Chat Activity
+        Intent chat = new Intent(AccountActivity.this, ChatActivity.class);
+        chat.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(chat);
         finish();
-
     }
 
-    public void AboutUsClick (View view)
-    {
-        //Accesofchat
-        Intent aboutUs = new Intent(AccountActivity.this,AboutUsActivity.class);
-        //finish Activity, dont come back
-        aboutUs.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+    public void AboutUsClick(View view) {
+        // Switch to the About Us Activity
+        Intent aboutUs = new Intent(AccountActivity.this, AboutUsActivity.class);
+        aboutUs.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(aboutUs);
         finish();
-
-
     }
 
-    public void MapsClick (View view)
-    {
-        //Accesofmaps
-        //Accesofchat
+    public void MapsClick(View view) {
+        // Switch to the Maps Activity
         Intent maps = new Intent(AccountActivity.this, MapsActivity.class);
-        //finish Activity, dont come back
-        maps.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        maps.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(maps);
         finish();
-
-
     }
 
-    public void ExitClick (View view)
-    {
-        //exit
-        AlertDialog.Builder warningwindow = new AlertDialog.Builder(AccountActivity.this);
+    public void ExitClick(View view) {
+        // Show exit confirmation dialog
+        AlertDialog.Builder warningWindow = new AlertDialog.Builder(AccountActivity.this);
+        warningWindow.setTitle("Exit");
+        warningWindow.setMessage("Are you sure you want to sign out?");
 
-        warningwindow.setTitle("Exit");
-        warningwindow.setMessage("Are you sure you want to sign out?");
-
-        //if yes
-        warningwindow.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        warningWindow.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-
                 finishAffinity();
                 System.exit(0);
             }
         });
-        //if no
-        warningwindow.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+        warningWindow.setNegativeButton("NO", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-
                 dialogInterface.dismiss();
             }
         });
 
-        //show the warningwindow
-        warningwindow.show();
-
+        warningWindow.show();
     }
 
-    //If the program is stopped, close the drawer
-    protected void onPause(){
-
+    @Override
+    protected void onPause() {
+        // Close the drawer when the activity is paused
         MainActivity.closethedrawer(drawer);
-
         super.onPause();
     }
-
-
 }

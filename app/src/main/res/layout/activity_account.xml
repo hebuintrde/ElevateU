@@ -11,11 +11,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:orientation="vertical">
 
         <include
-            layout="@layout/main_toolbar"/>
+            layout="@layout/main_toolbar" />
 
         <TextView
             android:layout_width="match_parent"
@@ -25,24 +24,54 @@
             android:gravity="center"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:padding="16dp"/>
+            android:padding="16dp" />
+
+        <TextView
+            android:id="@+id/text_name_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name:"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:padding="8dp" />
+
+        <TextView
+            android:id="@+id/text_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:padding="8dp" />
+
+
+        <TextView
+            android:id="@+id/text_email_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email:"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:padding="8dp" />
+
+        <TextView
+            android:id="@+id/text_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:padding="8dp" />
 
     </LinearLayout>
-
 
     <RelativeLayout
         android:layout_width="300dp"
         android:layout_height="match_parent"
         android:background="@android:color/white"
         android:layout_gravity="start">
-        
-        <include
-            layout="@layout/menu_nawigation_drawer"/>
 
+        <include
+            layout="@layout/menu_nawigation_drawer" />
 
     </RelativeLayout>
-
-
-
 
 </androidx.drawerlayout.widget.DrawerLayout>

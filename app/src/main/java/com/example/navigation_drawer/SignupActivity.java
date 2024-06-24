@@ -1,6 +1,7 @@
 package com.example.navigation_drawer;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,6 +17,10 @@ public class SignupActivity extends AppCompatActivity {
     private UserViewModel userViewModel;
     private EditText editName, editSurname, editBirthday, editEmail, editPassword, editConfirmPassword;
     private TextView account;
+    SharedPreferences sharedPreferences;
+    private static final String SHARED_PREF_NAME = "mypref";
+    private static final String KEY_NAME = "name";
+    private static final String KEY_EMAIL = "email";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +39,8 @@ public class SignupActivity extends AppCompatActivity {
 
         findViewById(R.id.register_btn).setOnClickListener(v -> registerUser());
 
+        sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
+
         // Set up click listener for the "I have an account" TextView
         account.setOnClickListener(v -> navigateToLogin());
     }
@@ -45,7 +52,6 @@ public class SignupActivity extends AppCompatActivity {
         String email = editEmail.getText().toString();
         String password = editPassword.getText().toString();
         String confirmPassword = editConfirmPassword.getText().toString();
-        String anaccount = account.getText().toString();
 
         if (!validateInput(name, surname, birthday, email, password, confirmPassword)) {
             return;
@@ -69,12 +75,18 @@ public class SignupActivity extends AppCompatActivity {
 
                 userViewModel.insert(user);
                 Toast.makeText(this, "User Registered", Toast.LENGTH_SHORT).show();
+
+                // Save user information in SharedPreferences
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString(KEY_NAME, name);
+                editor.putString(KEY_EMAIL, email);
+                editor.apply();
+
                 finish();
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
             }
         });
-
     }
 
     private boolean validateInput(String name, String surname, String birthdate, String email, String password, String confirmPassword) {

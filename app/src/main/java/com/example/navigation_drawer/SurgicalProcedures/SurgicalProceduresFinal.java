@@ -1,4 +1,4 @@
-package com.example.navigation_drawer;
+package com.example.navigation_drawer.SurgicalProcedures;
 
 import android.os.Bundle;
 
@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.navigation_drawer.R;
 
 public class SurgicalProceduresFinal extends AppCompatActivity {
 

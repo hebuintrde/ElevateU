@@ -14,6 +14,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.navigation_drawer.Doctor.Doctor;
 import com.example.navigation_drawer.Maps.MapsActivity;
+import com.example.navigation_drawer.NonSurgicalProcedures.NonSurgicalProceduresDescriptions;
+import com.example.navigation_drawer.SurgicalProcedures.SurgicalProceduresDescriptions;
 
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -53,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         openSurgicalProceduresActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent surgical_intent = new Intent(MainActivity.this,SurgicalProceduresDescriptions.class);
+                Intent surgical_intent = new Intent(MainActivity.this, SurgicalProceduresDescriptions.class);
                 startActivity(surgical_intent);
             }
         });
