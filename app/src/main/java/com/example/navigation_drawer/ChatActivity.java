@@ -17,7 +17,7 @@ import androidx.gridlayout.widget.GridLayout;
 import com.example.navigation_drawer.Doctor.Doctor;
 import com.example.navigation_drawer.Doctor.DoctorDetailActivity;
 import com.example.navigation_drawer.Maps.MapsActivity;
-import com.example.navigation_drawer.Message.Message;
+import com.example.navigation_drawer.Message.MessageActivity;
 
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -42,7 +42,7 @@ public class ChatActivity extends AppCompatActivity {
         Chatbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent chat = new Intent(ChatActivity.this, Message.class); // Replace ChatTargetActivity with the correct Activity
+                Intent chat = new Intent(ChatActivity.this, MessageActivity.class); // Replace ChatTargetActivity with the correct Activity
                 chat.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(chat);
                 finish();

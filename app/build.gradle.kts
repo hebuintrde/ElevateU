@@ -46,6 +46,22 @@ dependencies {
     implementation("androidx.drawerlayout:drawerlayout:1.2.0")
     implementation("androidx.gridlayout:gridlayout:1.0.0")
 
+
+    val lifecycle_version = "2.8.2"
+// ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version")
+    // LiveData
+    implementation("androidx.lifecycle:lifecycle-livedata:$lifecycle_version")
+
+    val appcompat_version = "1.7.0"
+
+    implementation("androidx.appcompat:appcompat:$appcompat_version")
+
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+
+
+
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)

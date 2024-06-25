@@ -33,17 +33,13 @@ public class MainActivity extends AppCompatActivity {
 
         MyDatabase db = MyDatabase.getDatabase(this);
 
-
         Executors.newSingleThreadExecutor().execute(() -> {
-            db.doctorDao().insert(new Doctor("Dr. John Doe", "Plastic Surgeon", "url_to_photo1"));
-            db.doctorDao().insert(new Doctor("Dr. Jane Smith", "Dermatologist", "url_to_photo2"));
-
-            List<Doctor> doctors = db.doctorDao().getAllDoctors();
-            for (Doctor doctor : doctors) {
-                Log.d("Doctor", doctor.getName() + ", " + doctor.getSpecialization());
+            // Check if doctors already exist
+            List<Doctor> existingDoctors = db.doctorDao().getAllDoctors();
+            if (existingDoctors.isEmpty()) {
+                // Insert only if the list is empty
+                db.doctorDao().insert(new Doctor("Dr. John Doe", "Plastic Surgeon", "url_to_photo1"));
             }
-
-
         });
 
 
