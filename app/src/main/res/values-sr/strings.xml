@@ -48,10 +48,10 @@
     <string name="name">Ime korisnika:</string>
     <string name="email2">Email korisnika:</string>
     <string name="select_a_doctor">Odaberi doktora</string>
-    <string name="chat2">Ćaskanje</string>
+    <string name="chat2">Čet</string>
     <string name="doctor_name">Ime doktora</string>
     <string name="doctor_specialization">Specijalizacija</string>
-    <string name="chat_with_doctor">Ćaskanje s doktorom</string>
+    <string name="chat_with_doctor">Čet s doktorom</string>
     <string name="sign_up">Registracija</string>
     <string name="name2">Ime</string>
     <string name="surname">Prezime</string>
@@ -85,5 +85,11 @@
     <string name="doctor_name_john_doe">Dr. John Doe</string>
     <string name="doctor_specialty_plastic_surgeon">Plastični hirurg</string>
     <string name="doctor_photo_url_1">url_do_slike1</string>
+    <string name="surname2">Prezime:</string>
+    <string name="birthday2">Datum rođenja:</string>
+    <string name="toast_invalid_credentials">Molimo Vas da unesete tačne podatke.</string>
+    <string name="toast_login_successful">Uspešna prijava!</string>
+    <string name="toast_invalid_email_or_password">Nevažeća e-pošta ili lozinka</string>
+
 
 </resources>

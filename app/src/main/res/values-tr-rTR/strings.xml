@@ -85,4 +85,11 @@
     <string name="doctor_name_john_doe">Dr. John Doe</string>
     <string name="doctor_specialty_plastic_surgeon">Plastik Cerrah</string>
     <string name="doctor_photo_url_1">fotoğraf_url_1</string>
+    <string name="surname2">Soyadı:</string>
+    <string name="birthday2">Doğum Tarihi:</string>
+    <string name="toast_invalid_credentials">Lütfen geçerli kimlik bilgilerini giriniz.</string>
+    <string name="toast_login_successful">Giriş başarılı!</string>
+    <string name="toast_invalid_email_or_password">Geçersiz e-posta veya şifre</string>
+
+
 </resources>

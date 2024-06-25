@@ -85,4 +85,10 @@
     <string name="doctor_name_john_doe">Dr. John Doe</string>
     <string name="doctor_specialty_plastic_surgeon">Plastischer Chirurg</string>
     <string name="doctor_photo_url_1">url_zu_foto1</string>
+    <string name="surname2">Nachname:</string>
+    <string name="birthday2">Geburtsdatum:</string>
+    <string name="toast_invalid_credentials">Bitte geben Sie gültige Anmeldedaten ein.</string>
+    <string name="toast_login_successful">Anmeldung erfolgreich!</string>
+    <string name="toast_invalid_email_or_password">Ungültige E-Mail-Adresse oder Passwort</string>
+
 </resources>

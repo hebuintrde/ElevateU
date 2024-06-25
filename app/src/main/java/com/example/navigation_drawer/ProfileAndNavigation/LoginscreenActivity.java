@@ -1,6 +1,7 @@
 package com.example.navigation_drawer.ProfileAndNavigation;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,61 +28,46 @@ import com.example.navigation_drawer.User.UserViewModel;
  * @author Lana Cvijic
  */
 public class LoginscreenActivity extends AppCompatActivity {
-    private UserViewModel userViewModel;
     private EditText editEmail, editPassword;
     private TextView noAccount;
     private Button loginButton;
 
+    SharedPreferences sharedPreferences;
+    private static final String SHARED_PREF_NAME = "mypref";
+    private static final String KEY_NAME = "name";
+    private static final String KEY_SUR_NAME = "surname";
+    private static final String KEY_EMAIL = "email";
+    private static final String KEY_BIRTHDAY = "birthday";
 
-    /**
-     * Initializes the activity layout and sets up views and click listeners.
-     *
-     * @param savedInstanceState A Bundle object containing the activity's previously saved state, if any.
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loginscreen);
 
-        // Initialize views
         editEmail = findViewById(R.id.edit_email);
         editPassword = findViewById(R.id.edit_password);
         noAccount = findViewById(R.id.no_account);
         loginButton = findViewById(R.id.login_btn);
 
-        // Set click listeners
         loginButton.setOnClickListener(v -> attemptLogin());
         noAccount.setOnClickListener(v -> startActivity(new Intent(this, SignupActivity.class)));
 
-
+        sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
     }
 
-    /**
-     * Attempts to log in the user using the provided email and password.
-     * Displays a toast message if credentials are missing or incorrect.
-     */
     private void attemptLogin() {
         String email = editEmail.getText().toString();
         String password = editPassword.getText().toString();
 
         if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Please enter valid credentials", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.toast_invalid_credentials), Toast.LENGTH_LONG).show();
+
             return;
         } else {
-
             authenticatePatient(email, password);
-
-
         }
     }
 
-    /**
-     * Authenticates the user asynchronously against the local database.
-     * Displays a toast message indicating login success or failure.
-     *
-     * @param email    The email entered by the user.
-     * @param password The password entered by the user.
-     */
     private void authenticatePatient(String email, String password) {
         new Thread(() -> {
             MyDatabase db = MyDatabase.getDatabase(getApplicationContext());
@@ -90,13 +76,21 @@ public class LoginscreenActivity extends AppCompatActivity {
 
             runOnUiThread(() -> {
                 if (user != null) {
-                    Toast.makeText(LoginscreenActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
+                    // Save user information in SharedPreferences
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString(KEY_NAME, user.getFirstName());
+                    editor.putString(KEY_SUR_NAME, user.getLastName());
+                    editor.putString(KEY_EMAIL, user.getEmail());
+                    editor.putString(KEY_BIRTHDAY, user.getBirthday());
+                    editor.apply();
+
+                    Toast.makeText(LoginscreenActivity.this, getString(R.string.toast_login_successful), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginscreenActivity.this, MainActivity.class);
-                    intent.putExtra("user_id", email);  // mit parseInt Methode bekommt man ein int zuruck und das dient als unique ID
+                    intent.putExtra("user_id", email);
                     startActivity(intent);
                     finish();
                 } else {
-                    Toast.makeText(LoginscreenActivity.this, "Invalid email number or password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginscreenActivity.this, getString(R.string.toast_invalid_email_or_password), Toast.LENGTH_SHORT).show();
                 }
             });
         }).start();

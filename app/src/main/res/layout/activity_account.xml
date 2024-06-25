@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProfileAndNavigation.AccountActivity"
-    android:background="@drawable/account_background_3">
+    android:background="@drawable/login_background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,16 +33,34 @@
             android:text="@string/name"
             android:textColor="@color/black"
             android:textSize="18sp"
-            android:padding="8dp" />
+            android:padding="8dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/text_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
+            android:textColor="@color/lila2"
             android:textSize="18sp"
             android:padding="8dp" />
 
+        <TextView
+            android:id="@+id/text_surname_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/surname2"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:padding="8dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/text_surname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/lila2"
+            android:textSize="18sp"
+            android:padding="8dp" />
 
         <TextView
             android:id="@+id/text_email_label"
@@ -51,13 +69,33 @@
             android:text="@string/email2"
             android:textColor="@color/black"
             android:textSize="18sp"
-            android:padding="8dp" />
+            android:padding="8dp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/text_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/lila2"
+            android:textSize="18sp"
+            android:padding="8dp" />
+
+        <!-- Add these lines for the birthday -->
+        <TextView
+            android:id="@+id/text_birthday_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/birthday2"
             android:textColor="@color/black"
+            android:textSize="18sp"
+            android:padding="8dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/text_birthday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/lila2"
             android:textSize="18sp"
             android:padding="8dp" />
 

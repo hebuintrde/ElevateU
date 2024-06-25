@@ -32,7 +32,9 @@ public class SignupActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     private static final String SHARED_PREF_NAME = "mypref";
     private static final String KEY_NAME = "name";
+    private static final String KEY_SUR_NAME = "surname";
     private static final String KEY_EMAIL = "email";
+    private static final String KEY_BIRTHDAY = "birthday";
 
     /**
      * Initializes the activity layout and sets up views, ViewModel, and click listeners.
@@ -106,7 +108,9 @@ public class SignupActivity extends AppCompatActivity {
                 // Save user information in SharedPreferences
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString(KEY_NAME, name);
+                editor.putString(KEY_SUR_NAME, surname);
                 editor.putString(KEY_EMAIL, email);
+                editor.putString(KEY_BIRTHDAY, birthday);
                 editor.apply();
 
                 // Finish the activity and navigate to MainActivity

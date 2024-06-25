@@ -85,5 +85,12 @@
     <string name="doctor_name_john_doe">Dr. John Doe</string>
     <string name="doctor_specialty_plastic_surgeon">Plastic surgeon</string>
     <string name="doctor_photo_url_1">url_to_photo1</string>
+    <string name="surname2">Surname:</string>
+    <string name="birthday2">Birthday:</string>
+    <string name="toast_invalid_credentials">Please enter valid credentials</string>
+    <string name="toast_login_successful">Login successful!</string>
+    <string name="toast_invalid_email_or_password">Invalid email or password</string>
+
+
 
 </resources>

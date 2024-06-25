@@ -160,11 +160,11 @@ public class ChatActivity extends AppCompatActivity {
         // Exit
         AlertDialog.Builder warningwindow = new AlertDialog.Builder(ChatActivity.this);
 
-        warningwindow.setTitle("Exit");
-        warningwindow.setMessage("Are you sure you want to sign out?");
+        warningwindow.setTitle(getString(R.string.exit_title));
+        warningwindow.setMessage(getString(R.string.exit_message));
 
         // If yes
-        warningwindow.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        warningwindow.setPositiveButton(getString(R.string.exit_yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 finishAffinity();
@@ -173,7 +173,7 @@ public class ChatActivity extends AppCompatActivity {
         });
 
         // If no
-        warningwindow.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+        warningwindow.setNegativeButton(getString(R.string.exit_no), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();

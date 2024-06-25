@@ -17,7 +17,7 @@ import com.example.navigation_drawer.R;
 /**
  * Activity for managing user account information and navigation options.
  *
- * <p>This activity displays the user's name and email retrieved from SharedPreferences.
+ * <p>This activity displays the user's fullname and email retrieved from SharedPreferences.
  * It provides options to navigate to different parts of the application such as the main
  * activity, chat feature, about us section, and maps functionality. Users can also log out
  * using the exit button, which prompts a confirmation dialog.
@@ -33,8 +33,10 @@ public class AccountActivity extends AppCompatActivity {
 
     private static final String SHARED_PREF_NAME = "mypref";
     private static final String KEY_NAME = "name";
+    private static final String KEY_SUR_NAME = "surname";
     private static final String KEY_EMAIL = "email";
-    private TextView textName, textEmail;
+    private static final String KEY_BIRTHDAY = "birthday";
+    private TextView textName, textSurName, textEmail, textBirthday;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,15 +45,21 @@ public class AccountActivity extends AppCompatActivity {
 
         drawer = findViewById(R.id.drawer_background);
         textName = findViewById(R.id.text_name);
+        textSurName = findViewById(R.id.text_surname);
         textEmail = findViewById(R.id.text_email);
+        textBirthday = findViewById(R.id.text_birthday);
 
         sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
 
         // Retrieve and display user information
         String name = sharedPreferences.getString(KEY_NAME, "N/A");
+        String surname = sharedPreferences.getString(KEY_SUR_NAME, "N/A");
         String email = sharedPreferences.getString(KEY_EMAIL, "N/A");
+        String birthday = sharedPreferences.getString(KEY_BIRTHDAY, "N/A");
         textName.setText(name);
+        textSurName.setText(surname);
         textEmail.setText(email);
+        textBirthday.setText(birthday);
     }
 
     public void MenuClick(View view) {
@@ -104,10 +112,10 @@ public class AccountActivity extends AppCompatActivity {
     public void ExitClick(View view) {
         // Show exit confirmation dialog
         AlertDialog.Builder warningWindow = new AlertDialog.Builder(AccountActivity.this);
-        warningWindow.setTitle("Exit");
-        warningWindow.setMessage("Are you sure you want to sign out?");
+        warningWindow.setTitle(getString(R.string.exit_title));
+        warningWindow.setMessage(getString(R.string.exit_message));
 
-        warningWindow.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        warningWindow.setPositiveButton(getString(R.string.exit_yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 finishAffinity();
@@ -115,7 +123,7 @@ public class AccountActivity extends AppCompatActivity {
             }
         });
 
-        warningWindow.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+        warningWindow.setNegativeButton(getString(R.string.exit_no), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();

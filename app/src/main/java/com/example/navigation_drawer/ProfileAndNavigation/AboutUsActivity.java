@@ -73,16 +73,16 @@ public class AboutUsActivity extends AppCompatActivity {
 
     public void ExitClick(View view) {
         AlertDialog.Builder warningwindow = new AlertDialog.Builder(AboutUsActivity.this);
-        warningwindow.setTitle("Exit");
-        warningwindow.setMessage("Are you sure you want to sign out?");
-        warningwindow.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        warningwindow.setTitle(getString(R.string.exit_title));
+        warningwindow.setMessage(getString(R.string.exit_message));
+        warningwindow.setPositiveButton(getString(R.string.exit_yes), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 finishAffinity();
                 System.exit(0);
             }
         });
-        warningwindow.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+        warningwindow.setNegativeButton(getString(R.string.exit_no), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
