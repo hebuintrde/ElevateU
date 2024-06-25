@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:background="@color/white"
-            android:text="Chat with Doctor"
+            android:text="@string/chat_with_doctor"
             android:textStyle="bold"
             android:gravity="center"
             android:textAllCaps="false"
@@ -57,7 +57,7 @@
                 android:id="@+id/message_input"
                 android:layout_width="270dp"
                 android:layout_height="wrap_content"
-                android:hint="Please enter your message"
+                android:hint="@string/please_enter_your_message"
                 android:padding="14dp"/>
 
             <ImageButton

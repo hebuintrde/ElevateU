@@ -9,7 +9,7 @@
         android:id="@+id/textView_doctor_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Doctor Name"
+        android:text="@string/doctor_name"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_marginBottom="8dp"/>
@@ -18,7 +18,7 @@
         android:id="@+id/textView_doctor_specialization"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Doctor Specialization"
+        android:text="@string/doctor_specialization"
         android:textSize="18sp"
         android:layout_marginBottom="8dp"/>
 

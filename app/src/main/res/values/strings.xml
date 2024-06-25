@@ -1,30 +1,24 @@
 <resources>
-    <string name="app_name">Navigation_Drawer</string>
+    <string name="app_name">ElevateU</string>
     <string name="chat">Chat</string>
     <string name="welcome">Welcome to our beauty guide!</string>
     <string name="description_homepage">We are here to guide your beauty journey and boost your self-esteem. Easily find information about aesthetic procedures by clicking on the buttons below.</string>
-    <string name="surgical_procedures">Explore surgical procedures</string>
-    <string name="non_surgical_procedures">Explore non-surgical procedures</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="surg_procedures_message">Find out more about surgical procedures</string>
+    <string name="explore_more_about_surgical_procedures">Explore more about surgical procedures</string>
     <string name="breast_augmentation">Breast Augmentation</string>
     <string name="nose_reconstruction">Nose Reconstruction</string>
     <string name="liposuction">Liposuction</string>
-    <string name="explore_message2">Find out more about non-surgical procedures</string>
+    <string name="explore_message2">Explore more about non-surgical procedures</string>
     <string name="fillers">Face and lip fillers</string>
     <string name="laser_hair_removal">Laser hair removal</string>
     <string name="microdermabrasion">Microdermabrasion</string>
-    <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
     <string name="nose_fragment_title">Nose Reconstruction</string>
     <string name="liposuction_fragment_title">Liposuction</string>
     <string name="breast_fragment_title">Breast Augmentation</string>
-
     <string name="nose">Nose</string>
     <string name="breast">Breast</string>
     <string name="body">Body</string>
@@ -43,6 +37,53 @@
     <string name="developers">Developers: Lana Cvijic and Beyza Arbaz</string>
     <string name="slogan">Beauty, informed! - ElevateU</string>
     <string name="my_account">My account</string>
-
     <string name="my_map_api_key">AIzaSyAvun4SVfoN0EkjEBmQ3fRRpFpbdALFTu4</string>
+    <string name="description_homepage2">We are here to guide your beauty journey and boost your self-esteem. Easily find information about aesthetic procedures by clicking on the buttons below.</string>
+    <string name="explore_more_about_non_surgical_procedures">Explore more about non-surgical procedures</string>
+    <string name="home_page">Home Page</string>
+    <string name="account">Account</string>
+    <string name="about_us2">About Us</string>
+    <string name="maps">Maps</string>
+    <string name="exit">Exit</string>
+    <string name="name">Name:</string>
+    <string name="email2">Email:</string>
+    <string name="select_a_doctor">Select a Doctor</string>
+    <string name="chat2">Chat</string>
+    <string name="doctor_name">Doctor Name</string>
+    <string name="doctor_specialization">Doctor Specialization</string>
+    <string name="chat_with_doctor">Chat with Doctor</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="name2">Name</string>
+    <string name="surname">Surname</string>
+    <string name="birthday">Birthday</string>
+    <string name="email3">Email</string>
+    <string name="password2">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="register">Register</string>
+    <string name="i_have_an_account">I have an account</string>
+    <string name="message_text">Message text</string>
+    <string name="exit_title">Exit</string>
+    <string name="exit_message">Are you sure you want to sign out?</string>
+    <string name="exit_yes">YES</string>
+    <string name="exit_no">NO</string>
+    <string name="please_enter_your_message">Please enter your message</string>
+    <string name="your_current_location">Your current location</string>
+    <string name="botox_and_fillers">Botox and fillers</string>
+    <string name="rhinoplasty_and_liposuction">Rhinoplasty and liposuction</string>
+    <string name="breast_augmentation2">Breast augmentation</string>
+    <string name="nose_reconstruction2">Nose reconstruction</string>
+    <string name="liposuction_and_breast_reduction">Liposuction and breast reduction</string>
+    <string name="aesthetic_surgery_for_men">Aesthetic surgery for men</string>
+    <string name="dermatology_and_hyaluron_filler">Dermatology and hyaluron filler</string>
+    <string name="m1_med_beauty_graz">M1 Med Beauty Graz</string>
+    <string name="graz_clinic_aesthetic_surgery">The Graz Clinic for Aesthetic Surgery</string>
+    <string name="plastic_surgeon_dr_martin_grohmann">Plastic Surgeon - Dr. Martin Grohmann</string>
+    <string name="surgeon_practice_dr_thomas_rappl">Practice: Dr. Thomas Rappl</string>
+    <string name="ma_ra_medical_aesthetic_research_academy">MA-RA Medical Aesthetic Research Academy</string>
+    <string name="center_plastic_surgery_univ_doz_dr_franz_maria_haas">Center for plastic surgery - Univ. Doz. Dr. Franz Maria Haas</string>
+    <string name="surgeon_practice_priv_doz_ddr_raimund_winter">Practice: Priv.-Doz. DDr. Raimund Winter</string>
+    <string name="doctor_name_john_doe">Dr. John Doe</string>
+    <string name="doctor_specialty_plastic_surgeon">Plastic surgeon</string>
+    <string name="doctor_photo_url_1">url_to_photo1</string>
+
 </resources>

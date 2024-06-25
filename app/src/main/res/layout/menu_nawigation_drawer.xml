@@ -31,7 +31,7 @@
             android:layout_marginStart="16dp"
             android:layout_weight="1"
             android:padding="12dp"
-            android:text="Home Page"
+            android:text="@string/home_page"
             android:textSize="20sp" />
 
         <ImageView
@@ -55,7 +55,7 @@
             android:layout_marginStart="16dp"
             android:layout_weight="1"
             android:padding="12dp"
-            android:text="Account"
+            android:text="@string/account"
             android:textSize="20sp" />
 
         <ImageView
@@ -104,7 +104,7 @@
             android:layout_marginStart="16dp"
             android:layout_weight="1"
             android:padding="12dp"
-            android:text="About Us"
+            android:text="@string/about_us2"
             android:textSize="20sp" />
 
         <ImageView
@@ -129,7 +129,7 @@
             android:layout_marginStart="16dp"
             android:layout_weight="1"
             android:padding="12dp"
-            android:text="Maps"
+            android:text="@string/maps"
             android:textSize="20sp" />
 
         <ImageView
@@ -153,7 +153,7 @@
             android:layout_marginStart="16dp"
             android:layout_weight="1"
             android:padding="12dp"
-            android:text="Exit"
+            android:text="@string/exit"
             android:textSize="20sp" />
 
         <ImageView

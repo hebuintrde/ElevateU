@@ -12,6 +12,15 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.example.navigation_drawer.R;
+/**
+ * A simple {@link Fragment} subclass that displays information about face procedures.
+ * This fragment uses a {@link WebView} to load and display content from a URL.
+ *
+ * @version 1.0
+ *
+ * @author  Beyza Arbaz
+ * @author Lana Cvijic
+ */
 
 public class FaceFragment extends Fragment {
 
@@ -25,6 +34,14 @@ public class FaceFragment extends Fragment {
         // Required empty public constructor
     }
 
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment FaceFragment.
+     */
     public static FaceFragment newInstance(String param1, String param2) {
         FaceFragment fragment = new FaceFragment();
         Bundle args = new Bundle();
@@ -43,6 +60,14 @@ public class FaceFragment extends Fragment {
         }
     }
 
+    /**
+     * Called to create the view hierarchy associated with the fragment.
+     *
+     * @param inflater The LayoutInflater object that can be used to inflate any views in the fragment.
+     * @param container If non-null, this is the parent view that the fragment's UI should be attached to.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state as given here.
+     * @return The View for the fragment's UI, or null.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

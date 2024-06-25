@@ -1,3 +1,4 @@
+/*
 package com.example.navigation_drawer.SurgicalProcedures;
 
 import android.os.Bundle;
@@ -24,3 +25,4 @@ public class SurgicalProceduresFinal extends AppCompatActivity {
         });
     }
 }
+*/

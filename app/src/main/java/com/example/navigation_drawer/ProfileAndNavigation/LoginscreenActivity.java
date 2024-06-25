@@ -1,20 +1,31 @@
-package com.example.navigation_drawer;
+package com.example.navigation_drawer.ProfileAndNavigation;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 
+import com.example.navigation_drawer.MainActivity;
+import com.example.navigation_drawer.MyDatabase;
+import com.example.navigation_drawer.R;
 import com.example.navigation_drawer.User.User;
 import com.example.navigation_drawer.User.UserDao;
 import com.example.navigation_drawer.User.UserViewModel;
 
+/**
+ * Activity for handling user login functionality.
+ * This activity allows users to log in using their email and password.
+ * It validates user input and authenticates against stored credentials in the local database.
+ * Upon successful login, the user is redirected to the {@link MainActivity}.
+ *
+ * @version 1.0
+ * @author Beyza Arbaz
+ * @author Lana Cvijic
+ */
 public class LoginscreenActivity extends AppCompatActivity {
     private UserViewModel userViewModel;
     private EditText editEmail, editPassword;
@@ -22,24 +33,33 @@ public class LoginscreenActivity extends AppCompatActivity {
     private Button loginButton;
 
 
+    /**
+     * Initializes the activity layout and sets up views and click listeners.
+     *
+     * @param savedInstanceState A Bundle object containing the activity's previously saved state, if any.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loginscreen);
 
-
+        // Initialize views
         editEmail = findViewById(R.id.edit_email);
         editPassword = findViewById(R.id.edit_password);
         noAccount = findViewById(R.id.no_account);
         loginButton = findViewById(R.id.login_btn);
 
-
+        // Set click listeners
         loginButton.setOnClickListener(v -> attemptLogin());
         noAccount.setOnClickListener(v -> startActivity(new Intent(this, SignupActivity.class)));
 
 
     }
 
+    /**
+     * Attempts to log in the user using the provided email and password.
+     * Displays a toast message if credentials are missing or incorrect.
+     */
     private void attemptLogin() {
         String email = editEmail.getText().toString();
         String password = editPassword.getText().toString();
@@ -55,6 +75,13 @@ public class LoginscreenActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Authenticates the user asynchronously against the local database.
+     * Displays a toast message indicating login success or failure.
+     *
+     * @param email    The email entered by the user.
+     * @param password The password entered by the user.
+     */
     private void authenticatePatient(String email, String password) {
         new Thread(() -> {
             MyDatabase db = MyDatabase.getDatabase(getApplicationContext());

@@ -14,12 +14,29 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.navigation_drawer.R;
 import com.example.navigation_drawer.SurgicalProcedures.NoseReconstructionFragment;
 import com.google.android.material.tabs.TabLayout;
-
+/**
+ * An activity that displays descriptions of non-surgical procedures using fragments.
+ * It uses a {@link TabLayout} to switch between different fragments that show information about procedures for face, hair and skin
+ * about face, hair, and skin procedures.
+ *
+ * @version 1.0
+ *
+ * @author  Beyza Arbaz
+ * @author Lana Cvijic
+ */
 public class NonSurgicalProceduresDescriptions extends AppCompatActivity {
 
     FrameLayout frameLayout_nonSurgical;
     TabLayout tabLayout_nonSurgical;
 
+    /**
+     * Called when the activity is first created.
+     * This method sets up the layout, initializes the tab layout and the frame layout,
+     * and sets the default fragment to be displayed when the activity is opened.
+     * Uses the same logic as SurgicalProcedures Activity
+     *
+     * @param savedInstanceState If the activity is being re-created from a previous saved state, this is the state.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

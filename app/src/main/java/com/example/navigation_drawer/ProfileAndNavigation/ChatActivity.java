@@ -1,4 +1,4 @@
-package com.example.navigation_drawer;
+package com.example.navigation_drawer.ProfileAndNavigation;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,11 +16,30 @@ import androidx.gridlayout.widget.GridLayout;
 
 import com.example.navigation_drawer.Doctor.Doctor;
 import com.example.navigation_drawer.Doctor.DoctorDetailActivity;
+import com.example.navigation_drawer.MainActivity;
 import com.example.navigation_drawer.Maps.MapsActivity;
 import com.example.navigation_drawer.Message.MessageActivity;
+import com.example.navigation_drawer.MyDatabase;
+import com.example.navigation_drawer.R;
 
 import java.util.List;
 import java.util.concurrent.Executors;
+/**
+ * Activity for handling chat-related functionalities and doctor listings.
+ *
+ * <p>This activity displays a list of doctors in a grid layout. Users can click on each doctor
+ * to view detailed information. It also provides navigation options to various parts of the app,
+ * such as the main activity, account, and about us section. Additionally, users can access
+ * messaging and map functionalities directly from this screen.
+ *
+ * <p>The chat button triggers navigation to the {@link MessageActivity}, where users can engage
+ * in messaging functionalities.
+ *
+ * @version 1.0
+ *
+ * @author Beyza Arbaz
+ * @author Lana Cvijic
+ */
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -49,11 +68,13 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-
-
+        // Load doctors list
         loadDoctors();
     }
 
+    /**
+     * Loads the list of doctors from the database and populates them into the grid layout.
+     */
     private void loadDoctors() {
         MyDatabase db = MyDatabase.getDatabase(this);
 
@@ -67,6 +88,11 @@ public class ChatActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Adds a doctor's information to the grid layout.
+     *
+     * @param doctor The Doctor object containing the doctor's details.
+     */
     private void addDoctorToGrid(Doctor doctor) {
         View doctorView = LayoutInflater.from(this).inflate(R.layout.item_doctor, gridLayout, false);
 
@@ -84,7 +110,6 @@ public class ChatActivity extends AppCompatActivity {
 
         gridLayout.addView(doctorView);
     }
-
 
     public void MenuClick(View view) {
         // Open the drawer that stand in main Activity

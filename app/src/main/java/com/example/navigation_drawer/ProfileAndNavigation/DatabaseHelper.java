@@ -1,4 +1,4 @@
-package com.example.navigation_drawer;
+package com.example.navigation_drawer.ProfileAndNavigation;
 
 import android.content.ContentValues;
 import android.content.Context;

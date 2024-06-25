@@ -5,7 +5,7 @@
     android:id="@+id/drawer_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AccountActivity"
+    tools:context=".ProfileAndNavigation.AccountActivity"
     android:background="@drawable/account_background_3">
 
     <LinearLayout
@@ -30,7 +30,7 @@
             android:id="@+id/text_name_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name:"
+            android:text="@string/name"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:padding="8dp" />
@@ -48,7 +48,7 @@
             android:id="@+id/text_email_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Email:"
+            android:text="@string/email2"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:padding="8dp" />

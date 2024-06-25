@@ -6,9 +6,7 @@ import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,9 +16,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.example.navigation_drawer.AboutUsActivity;
-import com.example.navigation_drawer.AccountActivity;
-import com.example.navigation_drawer.ChatActivity;
+import com.example.navigation_drawer.ProfileAndNavigation.AboutUsActivity;
+import com.example.navigation_drawer.ProfileAndNavigation.AccountActivity;
+import com.example.navigation_drawer.ProfileAndNavigation.ChatActivity;
 import com.example.navigation_drawer.MainActivity;
 import com.example.navigation_drawer.R;
 import com.google.android.gms.common.ConnectionResult;
@@ -107,7 +105,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         for (Clinic clinic : clinics) {
             // Customize markers based on whether it's the current location or a clinic
-            if (clinic.getName().equals("Your current location")) {
+            if (clinic.getName().equals(getString(R.string.your_current_location))) {
                 // This is the marker for current location
                 currentLocationMarker = mMap.addMarker(new MarkerOptions()
                         .position(clinic.getLocation())
@@ -130,15 +128,20 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private List<Clinic> getClinics() {
         List<Clinic> clinics = new ArrayList<>();
-        // Add the coordinates, names, and descriptions of the clinics in Graz
-        clinics.add(new Clinic(new LatLng(47.0717455, 15.3552233), "M1 Med Beauty Graz", "Botox and fillers"));
-        clinics.add(new Clinic(new LatLng(47.0345404, 15.3492954), "The Graz Clinic for Aesthetic Surgery", "Rhinoplasty and liposuction"));
-        clinics.add(new Clinic(new LatLng(47.070473, 15.3633478), "Plastic Surgeon - Dr. Martin Grohmann", "Breast augmentation"));
-        clinics.add(new Clinic(new LatLng(47.0754391, 15.3524217), "Surgeon's practice: Dr. Thomas Rappl ", "Nose reconstruction"));
-        clinics.add(new Clinic(new LatLng(47.0754105, 15.3524195), "MA-RA Medical Aesthetic Research Academy ", "Liposuction and breast reduction"));
-        clinics.add(new Clinic(new LatLng(47.0772466, 15.3932702), "Center for plastic surgery - Univ. Doz. Dr. Franz Maria Haas ", "Aesthetic surgery for men"));
-        clinics.add(new Clinic(new LatLng(47.0690047, 15.3667976), "Surgeon's practice: Priv.-Doz. DDr. Raimund Winter", "Dermatology and hyaluron filler"));
+        // Coordinates, names, and descriptions of the clinics in Graz
+        clinics.add(new Clinic(new LatLng(47.0717455, 15.3552233), getString(R.string.m1_med_beauty_graz), getString(R.string.botox_and_fillers)));
+        clinics.add(new Clinic(new LatLng(47.0345404, 15.3492954), getString(R.string.graz_clinic_aesthetic_surgery), getString(R.string.rhinoplasty_and_liposuction)));
+        clinics.add(new Clinic(new LatLng(47.070473, 15.3633478), getString(R.string.plastic_surgeon_dr_martin_grohmann), getString(R.string.breast_augmentation2)));
+        clinics.add(new Clinic(new LatLng(47.0754391, 15.3524217), getString(R.string.surgeon_practice_dr_thomas_rappl), getString(R.string.nose_reconstruction2)));
+        clinics.add(new Clinic(new LatLng(47.0754105, 15.3524195), getString(R.string.ma_ra_medical_aesthetic_research_academy), getString(R.string.liposuction_and_breast_reduction)));
+        clinics.add(new Clinic(new LatLng(47.0772466, 15.3932702), getString(R.string.center_plastic_surgery_univ_doz_dr_franz_maria_haas), getString(R.string.aesthetic_surgery_for_men)));
+        clinics.add(new Clinic(new LatLng(47.0690047, 15.3667976), getString(R.string.surgeon_practice_priv_doz_ddr_raimund_winter), getString(R.string.dermatology_and_hyaluron_filler)));
+
         // We can add more clinics as needed
+        //clinics in Belgrade
+        //clinics in Istanbul
+        //clinics in London
+
         return clinics;
     }
 
@@ -188,7 +191,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             LatLng currentLatLng = new LatLng(currentLatitude, currentLongitude);
             MarkerOptions markerOptions = new MarkerOptions()
                     .position(currentLatLng)
-                    .title("Your current location")
+                    .title(getString(R.string.your_current_location))
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)); // Use green color
             currentLocationMarker = mMap.addMarker(markerOptions);
 
@@ -268,10 +271,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     // navigation drawer methods
     public void MenuClick(View view) {
+
         MainActivity.openthedrawer(drawer);
     }
 
     public void LogoClick(View view) {
+
         MainActivity.closethedrawer(drawer);
     }
 
@@ -296,20 +301,22 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     public void MapsClick(View view) {
+
         recreate();
     }
 
     public void ExitClick(View view) {
         AlertDialog.Builder warningwindow = new AlertDialog.Builder(MapsActivity.this);
-        warningwindow.setTitle("Exit");
-        warningwindow.setMessage("Are you sure you want to sign out?");
-        warningwindow.setPositiveButton("YES", (dialogInterface, i) -> {
+        warningwindow.setTitle(getString(R.string.exit_title));
+        warningwindow.setMessage(getString(R.string.exit_message));
+        warningwindow.setPositiveButton(getString(R.string.exit_yes), (dialogInterface, i) -> {
             finishAffinity();
             System.exit(0);
         });
-        warningwindow.setNegativeButton("NO", (dialogInterface, i) -> dialogInterface.dismiss());
+        warningwindow.setNegativeButton(getString(R.string.exit_no), (dialogInterface, i) -> dialogInterface.dismiss());
         warningwindow.show();
     }
+
 
     @Override
     protected void onPause() {
@@ -317,4 +324,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onPause();
     }
 }
+/**
+ * We wanted to enhance the maps activity with Google Places API and we tried to implement it several times, but it didn't function properly.
+ * Anyways, we have left two classes in form of java files (DownloadUrl and GetNearbyPlacesData), another methods from MapsActivity
+ * have been deleted. When needed, we can provide AndroidStudio project with these functionalities (not-functioning)
+ */
 

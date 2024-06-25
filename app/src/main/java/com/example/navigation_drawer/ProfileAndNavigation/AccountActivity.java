@@ -1,4 +1,4 @@
-package com.example.navigation_drawer;
+package com.example.navigation_drawer.ProfileAndNavigation;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,8 +11,21 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.navigation_drawer.MainActivity;
 import com.example.navigation_drawer.Maps.MapsActivity;
-
+import com.example.navigation_drawer.R;
+/**
+ * Activity for managing user account information and navigation options.
+ *
+ * <p>This activity displays the user's name and email retrieved from SharedPreferences.
+ * It provides options to navigate to different parts of the application such as the main
+ * activity, chat feature, about us section, and maps functionality. Users can also log out
+ * using the exit button, which prompts a confirmation dialog.
+ *
+ * @version 1.0
+ * @author Beyza Arbaz
+ * @author Lana Cvijic
+ */
 public class AccountActivity extends AppCompatActivity {
 
     DrawerLayout drawer;
@@ -37,7 +50,6 @@ public class AccountActivity extends AppCompatActivity {
         // Retrieve and display user information
         String name = sharedPreferences.getString(KEY_NAME, "N/A");
         String email = sharedPreferences.getString(KEY_EMAIL, "N/A");
-
         textName.setText(name);
         textEmail.setText(email);
     }

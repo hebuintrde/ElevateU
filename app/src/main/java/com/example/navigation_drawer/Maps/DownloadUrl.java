@@ -1,6 +1,7 @@
+/*
 package com.example.navigation_drawer.Maps;
 
-/*
+
 import android.util.Log;
 
 import java.io.BufferedReader;

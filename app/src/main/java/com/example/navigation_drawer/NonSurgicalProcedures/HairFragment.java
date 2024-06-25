@@ -14,18 +14,20 @@ import android.webkit.WebViewClient;
 import com.example.navigation_drawer.R;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link HairFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * A simple {@link Fragment} subclass that displays information about hair procedures.
+ * This fragment uses a {@link WebView} to load and display content from a URL.
+ *
+ * @version 1.0
+ * @since 2024-06-25
+ *
+ * @author  Beyza Arbaz
+ * @author Lana Cvijic
  */
 public class HairFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -41,7 +43,6 @@ public class HairFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment HairFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static HairFragment newInstance(String param1, String param2) {
         HairFragment fragment = new HairFragment();
         Bundle args = new Bundle();
@@ -51,6 +52,11 @@ public class HairFragment extends Fragment {
         return fragment;
     }
 
+    /**
+     * Called to initialize the fragment's parameters.
+     *
+     * @param savedInstanceState If the fragment is being re-created from a previous saved state, this is the state.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +66,14 @@ public class HairFragment extends Fragment {
         }
     }
 
+    /**
+     * Called to create the view hierarchy associated with the fragment.
+     *
+     * @param inflater The LayoutInflater object that can be used to inflate any views in the fragment.
+     * @param container If non-null, this is the parent view that the fragment's UI should be attached to.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state as given here.
+     * @return The View for the fragment's UI, or null.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

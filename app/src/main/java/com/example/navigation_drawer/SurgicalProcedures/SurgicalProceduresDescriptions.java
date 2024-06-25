@@ -16,12 +16,34 @@ import com.example.navigation_drawer.SurgicalProcedures.BreastAugmentationFragme
 import com.example.navigation_drawer.SurgicalProcedures.LiposuctionFragment;
 import com.example.navigation_drawer.SurgicalProcedures.NoseReconstructionFragment;
 import com.google.android.material.tabs.TabLayout;
+/**
+ * This activity displays descriptions of various surgical procedures using fragments.
+ * It contains a TabLayout to switch between different surgical procedures descriptions (categories: nose, breast and body).
+ *
+ * @version 1.0
+ *
+ * @see BreastAugmentationFragment
+ * @see LiposuctionFragment
+ * @see NoseReconstructionFragment
+ * @see TabLayout
+ * @see FragmentTransaction
+ * @see EdgeToEdge --> using the entire width and height of the display
+ * @see WindowInsetsCompat
+ *
+ * Authors: Beyza Arbaz, Lana Cvijic
+ */
 
 public class SurgicalProceduresDescriptions extends AppCompatActivity {
 
     FrameLayout frameLayout;
     TabLayout tabLayout;
 
+    /**
+     * Called when the activity is first created. This method sets up the layout and initializes
+     * the TabLayout and FrameLayout for displaying 3 different surgical procedure fragments.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down then this Bundle contains the data it most recently supplied in onSaveInstanceState(Bundle).
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +58,7 @@ public class SurgicalProceduresDescriptions extends AppCompatActivity {
         frameLayout = (FrameLayout) findViewById(R.id.frameLayout);
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
 
-        //when we open the activity for the first time, it opens the fragment about nose reconstruction
+        //when we open the activity for the first time, it opens the fragment about nose reconstruction (rhinoplasty)
         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new NoseReconstructionFragment())
                 .addToBackStack(null)
                 .commit();
@@ -67,12 +89,12 @@ public class SurgicalProceduresDescriptions extends AppCompatActivity {
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
+                //no action needed
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
+                //no action needed
             }
         });
     }

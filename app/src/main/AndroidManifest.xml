@@ -40,7 +40,7 @@
             android:name=".SurgicalProcedures.SurgicalProceduresFinal"
             android:exported="false" />
         <activity
-            android:name=".LoginscreenActivity"
+            android:name=".ProfileAndNavigation.LoginscreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,19 +51,19 @@
 
 
         <activity
-            android:name=".SignupActivity"
+            android:name=".ProfileAndNavigation.SignupActivity"
             android:exported="false" />
         <activity
-            android:name=".ChatActivity"
+            android:name=".ProfileAndNavigation.ChatActivity"
             android:exported="false" />
         <activity
             android:name=".Maps.MapsActivity"
             android:exported="false" />
         <activity
-            android:name=".AboutUsActivity"
+            android:name=".ProfileAndNavigation.AboutUsActivity"
             android:exported="false" />
         <activity
-            android:name=".AccountActivity"
+            android:name=".ProfileAndNavigation.AccountActivity"
             android:exported="false" />
 
 

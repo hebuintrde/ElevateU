@@ -23,9 +23,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.navigation_drawer.AboutUsActivity;
-import com.example.navigation_drawer.AccountActivity;
-import com.example.navigation_drawer.ChatActivity;
+import com.example.navigation_drawer.ProfileAndNavigation.AboutUsActivity;
+import com.example.navigation_drawer.ProfileAndNavigation.AccountActivity;
+import com.example.navigation_drawer.ProfileAndNavigation.ChatActivity;
 import com.example.navigation_drawer.MainActivity;
 import com.example.navigation_drawer.Maps.MapsActivity;
 import com.example.navigation_drawer.R;

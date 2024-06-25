@@ -1,4 +1,4 @@
-package com.example.navigation_drawer;
+package com.example.navigation_drawer.ProfileAndNavigation;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,8 +9,21 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.navigation_drawer.MainActivity;
 import com.example.navigation_drawer.Maps.MapsActivity;
-
+import com.example.navigation_drawer.R;
+/**
+ * Activity displaying information about the application or company.
+ *
+ * <p>This activity provides navigation options to switch between different sections
+ * of the application, such as the main activity, user account, chat feature, and maps.
+ * Users can also refresh the current activity to reload information using the About Us
+ * button. The exit button triggers a confirmation dialog to sign out of the application.
+ *
+ * @version 1.0
+ * @author Beyza Arbaz
+ * @author Lana Cvijic
+ */
 public class AboutUsActivity extends AppCompatActivity {
 
     DrawerLayout drawer;
@@ -24,10 +37,12 @@ public class AboutUsActivity extends AppCompatActivity {
     }
 
     public void MenuClick(View view) {
+
         MainActivity.openthedrawer(drawer);
     }
 
     public void LogoClick(View view) {
+
         MainActivity.closethedrawer(drawer);
     }
 
@@ -47,6 +62,7 @@ public class AboutUsActivity extends AppCompatActivity {
     }
 
     public void AboutUsClick(View view) {
+
         recreate();
     }
 
