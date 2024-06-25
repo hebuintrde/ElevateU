@@ -13,16 +13,21 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.navigation_drawer.AboutUsActivity;
+import com.example.navigation_drawer.AccountActivity;
+import com.example.navigation_drawer.ChatActivity;
+import com.example.navigation_drawer.MainActivity;
+import com.example.navigation_drawer.Maps.MapsActivity;
 import com.example.navigation_drawer.R;
 
 public class MessageActivity extends AppCompatActivity {
@@ -30,6 +35,7 @@ public class MessageActivity extends AppCompatActivity {
     private MessageViewModel messageViewModel;
     private EditText messageInput;
     private ImageButton sendMessageButton, sendPhotoButton;
+    DrawerLayout drawer;
 
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 100;
     private static final int CAMERA_REQUEST_CODE = 102;
@@ -52,8 +58,10 @@ public class MessageActivity extends AppCompatActivity {
         messageViewModel.getAllMessages().observe(this, adapter::setMessages);
 
         messageInput = findViewById(R.id.message_input);
-
         sendPhotoButton = findViewById(R.id.camera_button);
+        sendMessageButton = findViewById(R.id.send_button);
+
+        drawer = findViewById(R.id.drawer_background);
 
         cameraPermissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
@@ -64,7 +72,6 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
 
-        sendMessageButton = findViewById(R.id.send_button);
         sendMessageButton.setOnClickListener(v -> {
             String text = messageInput.getText().toString().trim();
             if (!text.isEmpty()) {
@@ -115,5 +122,73 @@ public class MessageActivity extends AppCompatActivity {
                 messageViewModel.insert(message);
             }
         }
+    }
+
+    // Navigation drawer methods
+    public void MenuClick(View view) {
+        MainActivity.openthedrawer(drawer);
+    }
+
+    public void LogoClick(View view) {
+        MainActivity.closethedrawer(drawer);
+    }
+
+    public void HomePageClick(View view) {
+        Intent homepage = new Intent(MessageActivity.this, MainActivity.class);
+        startActivity(homepage);
+    }
+
+    public void AccountClick(View view) {
+        Intent account = new Intent(MessageActivity.this, AccountActivity.class);
+        startActivity(account);
+    }
+
+    public void ChatClick(View view) {
+        Intent chat = new Intent(MessageActivity.this, ChatActivity.class);
+        startActivity(chat);
+    }
+
+    public void AboutUsClick(View view) {
+        Intent aboutUs = new Intent(MessageActivity.this, AboutUsActivity.class);
+        startActivity(aboutUs);
+    }
+
+    public void MapsClick(View view) {
+        Intent maps = new Intent(MessageActivity.this, MapsActivity.class);
+        startActivity(maps);
+    }
+
+    public void ExitClick(View view) {
+        AlertDialog.Builder warningwindow = new AlertDialog.Builder(MessageActivity.this);
+        warningwindow.setTitle("Exit");
+        warningwindow.setMessage("Are you sure you want to sign out?");
+        warningwindow.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finishAffinity();
+                System.exit(0);
+            }
+        });
+        warningwindow.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        warningwindow.show();
+    }
+
+    @Override
+    protected void onPause() {
+        MainActivity.closethedrawer(drawer);
+        super.onPause();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent chatIntent = new Intent(MessageActivity.this, ChatActivity.class);
+        startActivity(chatIntent);
+        finish(); // Optional: Use this if you want to finish the current activity
     }
 }

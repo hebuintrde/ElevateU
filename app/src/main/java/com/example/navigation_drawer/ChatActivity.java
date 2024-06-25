@@ -165,3 +165,5 @@ public class ChatActivity extends AppCompatActivity {
         super.onPause();
     }
 }
+
+

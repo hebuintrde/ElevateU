@@ -1,6 +1,7 @@
-<RelativeLayout
+<androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Message.Message"
@@ -12,8 +13,8 @@
         android:orientation="vertical">
 
         <include
-            android:id="@+id/main_toolbar_withouttoolbar"
-            layout="@layout/main_toolbar_withouttoolbar"
+            android:id="@+id/main_toolbar"
+            layout="@layout/main_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp">
@@ -75,4 +76,16 @@
                 android:background="@drawable/baseline_add_a_photo_24"/>
         </LinearLayout>
     </LinearLayout>
-</RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:layout_gravity="start">
+
+        <include
+            layout="@layout/menu_nawigation_drawer" />
+
+    </RelativeLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>
