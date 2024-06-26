@@ -25,7 +25,7 @@ import com.example.navigation_drawer.R;
 import java.util.List;
 import java.util.concurrent.Executors;
 /**
- * Activity for handling chat-related functionalities and doctor listings.
+ * Activity for handling chat-related functionalities and doctor lists.
  *
  * <p>This activity displays a list of doctors in a grid layout. Users can click on each doctor
  * to view detailed information. It also provides navigation options to various parts of the app,
@@ -73,7 +73,7 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     /**
-     * Loads the list of doctors from the database and populates them into the grid layout.
+     * Loads the list of doctors from the database and sorts them into the grid layout.
      */
     private void loadDoctors() {
         MyDatabase db = MyDatabase.getDatabase(this);

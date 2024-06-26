@@ -90,6 +90,5 @@
     <string name="toast_invalid_credentials">Lütfen geçerli kimlik bilgilerini giriniz.</string>
     <string name="toast_login_successful">Giriş başarılı!</string>
     <string name="toast_invalid_email_or_password">Geçersiz e-posta veya şifre</string>
-
-
+    <string name="your_doctor">Doktorunuz:</string>
 </resources>

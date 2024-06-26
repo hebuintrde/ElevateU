@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="80dp"
-            android:text="@string/select_a_doctor"
+            android:text="@string/your_doctor"
             android:textSize="30sp"
             android:textStyle="bold"
             android:textColor="@color/black"/>
@@ -38,16 +38,16 @@
         </androidx.gridlayout.widget.GridLayout>
 
         <Button
-            android:layout_width="150dp"
-            android:layout_height="60dp"
-            android:text="@string/chat2"
-            android:backgroundTint="@color/black"
+            android:id="@+id/chat_button"
+            android:layout_width="172dp"
+            android:layout_height="81dp"
             android:layout_marginLeft="110dp"
-            android:textColor="@color/white"
-            android:padding="18dp"
             android:layout_marginTop="32dp"
-            android:textSize="15dp"
-            android:id="@+id/chat_button"/>
+            android:backgroundTint="@color/black"
+            android:padding="18dp"
+            android:text="@string/chat2"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
 
 
     </LinearLayout>

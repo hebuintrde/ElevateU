@@ -90,5 +90,5 @@
     <string name="toast_invalid_credentials">Bitte geben Sie gültige Anmeldedaten ein.</string>
     <string name="toast_login_successful">Anmeldung erfolgreich!</string>
     <string name="toast_invalid_email_or_password">Ungültige E-Mail-Adresse oder Passwort</string>
-
+    <string name="your_doctor">Dein Arzt:</string>
 </resources>

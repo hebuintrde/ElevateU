@@ -90,6 +90,5 @@
     <string name="toast_invalid_credentials">Molimo Vas da unesete tačne podatke.</string>
     <string name="toast_login_successful">Uspešna prijava!</string>
     <string name="toast_invalid_email_or_password">Nevažeća e-pošta ili lozinka</string>
-
-
+    <string name="your_doctor">Tvoj doktor: </string>
 </resources>
