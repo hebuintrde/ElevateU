@@ -15,6 +15,11 @@ import com.example.navigation_drawer.R;
 
 import java.util.List;
 
+/**
+ * RecyclerView Adapter class for displaying a list of Message objects.
+ * It supports two types of messages: text and image messages.
+ */
+
 public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_TEXT = 1;
     private static final int TYPE_IMAGE = 2;
@@ -28,6 +33,13 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         mContext = context;
     }
 
+
+    /**
+     * Returns the view type of the item at the given position.
+     *
+     * @param position The position of the item.
+     * @return The view type of the item.
+     */
     @Override
     public int getItemViewType(int position) {
         Message message = mMessages.get(position);
@@ -38,6 +50,14 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
+
+    /**
+     * Called when RecyclerView needs a new RecyclerView.ViewHolder of the given type to represent an item.
+     *
+     * @param parent   The ViewGroup into which the new view will be added after it is bound to an adapter position.
+     * @param viewType The view type of the new view.
+     * @return A new RecyclerView.ViewHolder that holds a View of the given view type.
+     */
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -50,6 +70,13 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
+
+    /**
+     * Called by RecyclerView to display the data at the specified position.
+     *
+     * @param holder   The ViewHolder which should be updated to represent the contents of the item at the given position.
+     * @param position The position of the item within the adapter's data set.
+     */
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Message current = mMessages.get(position);

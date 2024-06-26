@@ -13,14 +13,44 @@ import com.example.navigation_drawer.User.UserDao;
 import com.example.navigation_drawer.Message.Message;
 import com.example.navigation_drawer.Message.MessageDao;
 
+ /**
+ * MyDatabase is the main database class for the application.
+ * It is an abstract class that extends RoomDatabase.
+ * This class provides access to the DAOs for the entities.
+ */
 @Database(entities = {User.class, Doctor.class, Message.class}, version = 2, exportSchema = false)
 public abstract class MyDatabase extends RoomDatabase {
+
+    /**
+     * Provides access to the UserDao.
+     *
+     * @return the UserDao.
+     */
     public abstract UserDao userDao();
+
+    /**
+     * Provides access to the DoctorDao.
+     *
+     * @return the DoctorDao.
+     */
     public abstract DoctorDao doctorDao();
+
+    /**
+     * Provides access to the MessageDao.
+     *
+     * @return the MessageDao.
+     */
     public abstract MessageDao messageDao();
 
+    // Singleton instance of MyDatabase
     private static volatile MyDatabase INSTANCE;
 
+    /**
+     * Gets the singleton instance of MyDatabase.
+     *
+     * @param context the application context.
+     * @return the singleton instance of MyDatabase.
+     */
     public static MyDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
             synchronized (MyDatabase.class) {

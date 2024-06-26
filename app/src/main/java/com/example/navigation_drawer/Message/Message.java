@@ -2,9 +2,15 @@ package com.example.navigation_drawer.Message;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
+/**
+ * Message is an entity class that represents a table in the Room database.
+ * Each instance of this class represents a row in the 'messages' table.
+ */
 @Entity(tableName = "messages")
 public class Message {
+    /**
+     * Primary key for the Message entity, auto-generated.
+     */
     @PrimaryKey(autoGenerate = true)
     private int id;
     private String text;

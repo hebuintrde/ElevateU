@@ -10,6 +10,12 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * MessageRepository class that abstracts access to multiple data sources.
+ * This class is responsible for handling data operations for Message objects.
+ * It provides a clean API to the rest of the application for app data.
+ */
+
 public class MessageRepository {
     private MessageDao messageDao;
     private LiveData<List<Message>> allMessages;
@@ -22,6 +28,11 @@ public class MessageRepository {
         executorService = Executors.newSingleThreadExecutor();
     }
 
+    /**
+     * Returns a LiveData object containing a list of all messages.
+     *
+     * @return LiveData object containing all messages.
+     */
     public LiveData<List<Message>> getAllMessages() {
         return allMessages;
     }

@@ -7,6 +7,11 @@ import androidx.room.Query;
 
 import java.util.List;
 
+/**
+ * DoctorDao is an interface that defines database operations for the Doctor entity.
+ * It is used by the Room persistence library to generate the necessary code for these operations.
+ */
+
 @Dao
 public interface DoctorDao {
     @Insert

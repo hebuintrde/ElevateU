@@ -5,7 +5,8 @@
     android:id="@+id/drawer_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileAndNavigation.ChatActivity">
+    tools:context=".ProfileAndNavigation.ChatActivity"
+    android:background="@drawable/login_background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,9 +26,13 @@
 
         <androidx.gridlayout.widget.GridLayout
             android:id="@+id/gridLayout"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/rounded_corner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="32dp">
+            android:padding="24dp">
+            <!-- Doctor information will be added here dynamically -->
 
 
         </androidx.gridlayout.widget.GridLayout>
@@ -65,4 +70,3 @@
 </androidx.drawerlayout.widget.DrawerLayout>
 
 
-    <!-- Doctor information will be added here dynamically -->
